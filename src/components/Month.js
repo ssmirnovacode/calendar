@@ -5,7 +5,7 @@ import { LocaleContext } from "../context/localeContext";
 
 const Month = props => {
 
-    const { month, year } = props;
+    const { month, year, startDate, endDate } = props;
     const locale = useContext(LocaleContext);
 
     const daysArray = getDaysArray(month, year);
@@ -17,12 +17,17 @@ const Month = props => {
     const getTableCellClass = (week, day, j) => {
         let classes = 'table__td';
 
+        const currentDate = getDateString(year, month, day);
+
         if (week.indexOf(1) > j && monthMatrix.indexOf(week) === 0 ||
         day < 7 && monthMatrix.indexOf(week) === monthMatrix.length-1) {
            classes += ' disabled' 
         }
-        if (props.startDate === getDateString(year, month, day) || props.endDate === getDateString(year, month, day)) {
+        else if (startDate === currentDate || endDate === currentDate) {
             classes += ' selected';
+        }
+        else if (currentDate > startDate && currentDate < endDate) {
+            classes += ' between'
         }
         return classes;
     }
@@ -48,7 +53,7 @@ const Month = props => {
                                     week.map((day, j) => <td className={getTableCellClass(week, day, j)} 
                                                             id={getDateString(year, month, day)} 
                                                             key={month+day+year}
-                                                            onClick={props.handleMonthSelect}
+                                                            onClick={getTableCellClass(week, day, j).indexOf('disabled') > 0 ? () => {} : props.handleMonthSelect}
                                                             >
                                                                 {day}
                                                             </td>)
