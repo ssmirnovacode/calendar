@@ -1,0 +1,27 @@
+.table {
+    text-align: center;
+    border-spacing: 0;
+    margin: 3rem;
+}
+
+/* .table__header {
+    font-weight: bold;
+} */
+
+.table__body {
+    font-style: italic;
+}
+
+.table__td {
+    text-align: center;
+    border: 1px solid grey;
+    margin: 0;
+    padding: 5px;
+    width: 50px;
+    height: 50px;
+}
+
+.table__td:hover {
+    background-color: grey;
+    cursor: pointer;
+}
