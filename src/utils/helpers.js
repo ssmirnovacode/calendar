@@ -1,6 +1,13 @@
+// To do
+// 1. refactor with getDateSrting
+
+
+
 export const cutZeroFromTheStart = str =>  +str > 9 ? str : str[1];
 
 export const addZeroToStart = str => +str > 9 ? str : '0'+str;
+
+export const getDateString = (year, month, day) => `${year}-${addZeroToStart(month)}-${addZeroToStart(day)}`;
 
 export const getNextMonthYear = (month, year) =>  month === 12 ? { month: 1, year: year + 1 } : { month: month + 1, year };
 

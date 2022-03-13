@@ -1,4 +1,4 @@
-import { getDaysArray,  getMonthMatrix, getFullDateByLocale, addZeroToStart, getMonthByLocale, getWeekdaysByLocale } from "../utils/helpers";
+import { getDaysArray,  getMonthMatrix, getFullDateByLocale, addZeroToStart, getMonthByLocale, getWeekdaysByLocale, getDateString } from "../utils/helpers";
 import '../sass/month.scss';
 import { useContext } from "react";
 import { LocaleContext } from "../context/localeContext";
@@ -15,9 +15,16 @@ const Month = props => {
     const weekdays = getWeekdaysByLocale(monthMatrix[1], month, year, locale)
 
     const getTableCellClass = (week, day, j) => {
-        return week.indexOf(1) > j && monthMatrix.indexOf(week) === 0 ||
-        day < 7 && monthMatrix.indexOf(week) === monthMatrix.length-1 ? 
-        'table__td disabled' : 'table__td'
+        let classes = 'table__td';
+
+        if (week.indexOf(1) > j && monthMatrix.indexOf(week) === 0 ||
+        day < 7 && monthMatrix.indexOf(week) === monthMatrix.length-1) {
+           classes += ' disabled' 
+        }
+        if (props.startDate === getDateString(year, month, day) || props.endDate === getDateString(year, month, day)) {
+            classes += ' selected';
+        }
+        return classes;
     }
 
     return(
@@ -34,11 +41,17 @@ const Month = props => {
 
                 <tbody className='table__body'>
                 {
-                    monthMatrix.map((week) => {
+                    monthMatrix.map((week,i) => {
                         return(
-                            <tr key={Math.random()+week[0]}>
+                            <tr key={week+i}>
                                 {
-                                    week.map((day, j) => <td className={getTableCellClass(week, day, j)} key={month+day+year}>{day}</td>)
+                                    week.map((day, j) => <td className={getTableCellClass(week, day, j)} 
+                                                            id={getDateString(year, month, day)} 
+                                                            key={month+day+year}
+                                                            onClick={props.handleMonthSelect}
+                                                            >
+                                                                {day}
+                                                            </td>)
                                 }
                             </tr>
                         )
