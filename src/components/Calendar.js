@@ -1,17 +1,21 @@
-import { getFullDateByLocale } from "../utils/helpers";
+import { getFullDateByLocale, getMonthsToRender } from "../utils/helpers";
 import Month from "./Month";
 
 const Calendar = props => {
 
-    const { locale } = props;
+    const { locale, numberOfMonths } = props;
 
     const today = new Date();
     const [ year, month, day ] = today.toISOString().split('T')[0].split('-');
 
+    const monthsToRender = getMonthsToRender(month, year, numberOfMonths);
+
     return(
         <div>
             <h2>{getFullDateByLocale(today, 'ru')}</h2>
-            <Month month={month} year={year} />
+            {
+                monthsToRender.map(({ month, year }) => <Month key={month+year} month={month} year={year} />)
+            }
         </div>
     )
 }

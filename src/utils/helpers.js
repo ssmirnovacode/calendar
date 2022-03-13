@@ -43,3 +43,21 @@ export const getMonthMatrix = (arr) => {
 
     return matrix;
 }
+
+export const getNextMonthYear = (month, year) =>  month === 12 ? { month: 1, year: year + 1 } : { month: month + 1, year };
+
+export const getPrevMonthYear = (month, year) => month === 1 ? { month: 12, year: year - 1 } : { month: month -1 , year };
+
+export const getMonthsToRender = (currentMonth, currentYear, monthsToRender) => {
+    const monthsArr = [{ month: +currentMonth, year: +currentYear}];
+    let nextMonth = +currentMonth;
+    let nextYear = +currentYear
+    let i=1;
+    while( i < monthsToRender ) {
+        monthsArr.push(getNextMonthYear(nextMonth, nextYear));
+        nextMonth = getNextMonthYear(nextMonth, nextYear).month;
+        nextYear = getNextMonthYear(nextMonth, nextYear).year;
+        i++;
+    }
+    return monthsArr
+}

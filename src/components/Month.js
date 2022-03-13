@@ -18,7 +18,7 @@ const Month = props => {
                 </tr>
             </thead>
 
-            <tbody className='table__bod'y>
+            <tbody className='table__body'>
             {
                 monthMatrix.map(week => {
                     return(

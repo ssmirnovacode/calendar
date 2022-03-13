@@ -5,7 +5,7 @@ import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Calendar />
+    <Calendar numberOfMonths={3} />
   </React.StrictMode>,
   document.getElementById('root')
 );
