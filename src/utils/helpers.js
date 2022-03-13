@@ -11,9 +11,13 @@ export const getFullDateByLocale = (dateObj, locale) => {
     return dateObj.toLocaleDateString(locale, options)
 }
 
-export const getWeekdaysByLocale = (month, year, locale) => {
-    const dateObj = new Date(`${year}-${month}-01`);
-    dateObj.toLocaleDateString(locale, { weekday: 'short'})
+export const getWeekdaysByLocale = (week, month, year, locale) => {
+    const weekdays = [];
+    for (let i=0; i < week.length; i++) {
+        const date = new Date(`${year}-${month}-${week[i]}`);
+        weekdays.push(date.toLocaleDateString(locale, { weekday: 'short'}))
+    }
+    return weekdays;
 }
 
 export const getMonthByLocale = (month, year, locale) => {
@@ -40,7 +44,7 @@ export const getDaysArray = (month, year) => {
             daysArray.unshift(d)
         }
     }
-    if (lastDayWeekday != 0) {
+    if (lastDayWeekday !== 0) {
         const diff = 7 - lastDayWeekday;
         for (let d=1; d <=diff; d++) {
             daysArray.push(d)

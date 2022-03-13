@@ -1,6 +1,4 @@
-import { getDaysArray,  getMonthMatrix, getFullDateByLocale, addZeroToStart, getMonthByLocale } from "../utils/helpers";
-import { weekdays } from "../utils/weekdays";
-import { months } from "../utils/months";
+import { getDaysArray,  getMonthMatrix, getFullDateByLocale, addZeroToStart, getMonthByLocale, getWeekdaysByLocale } from "../utils/helpers";
 import '../sass/month.scss';
 import { useContext } from "react";
 import { LocaleContext } from "../context/localeContext";
@@ -13,6 +11,8 @@ const Month = props => {
     const daysArray = getDaysArray(month, year);
 
     const monthMatrix = getMonthMatrix(daysArray);
+
+    const weekdays = getWeekdaysByLocale(monthMatrix[1], month, year, locale)
 
     const getTableCellClass = (week, day, j) => {
         return week.indexOf(1) > j && monthMatrix.indexOf(week) === 0 ||
@@ -28,7 +28,7 @@ const Month = props => {
             <table className='table'>
                 <thead className='table__header'>
                     <tr>
-                        { Object.values(weekdays).map(wd => <th key={wd}>{wd.slice(0,3)}</th>) }
+                        { weekdays.map(wd => <th key={wd}>{wd}</th>) }
                     </tr>
                 </thead>
 

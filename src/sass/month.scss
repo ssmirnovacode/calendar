@@ -3,9 +3,9 @@
     border-spacing: 0;
 }
 
-/* .table__header {
-    font-weight: bold;
-} */
+thead.table__header tr {
+    margin-bottom: 1rem;
+} 
 
 .table__body {
     font-style: italic;
