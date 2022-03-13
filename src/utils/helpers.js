@@ -11,7 +11,13 @@ export const getFullDateByLocale = (dateObj, locale) => {
     return dateObj.toLocaleDateString(locale, options)
 }
 
-export const getMonthByLocale = (dateObj, locale) => {
+export const getWeekdaysByLocale = (month, year, locale) => {
+    const dateObj = new Date(`${year}-${month}-01`);
+    dateObj.toLocaleDateString(locale, { weekday: 'short'})
+}
+
+export const getMonthByLocale = (month, year, locale) => {
+    const dateObj = new Date(`${year}-${month}-01`);
     return dateObj.toLocaleDateString(locale, { month: 'long'})
 }
 

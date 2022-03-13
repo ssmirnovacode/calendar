@@ -1,11 +1,14 @@
-import { getDaysArray,  getMonthMatrix, getFullDateByLocale, addZeroToStart } from "../utils/helpers";
+import { getDaysArray,  getMonthMatrix, getFullDateByLocale, addZeroToStart, getMonthByLocale } from "../utils/helpers";
 import { weekdays } from "../utils/weekdays";
 import { months } from "../utils/months";
 import '../sass/month.scss';
+import { useContext } from "react";
+import { LocaleContext } from "../context/localeContext";
 
 const Month = props => {
 
     const { month, year } = props;
+    const locale = useContext(LocaleContext);
 
     const daysArray = getDaysArray(month, year);
 
@@ -20,7 +23,7 @@ const Month = props => {
     return(
         <div className="month">
             <div className="month__header">
-                { months[addZeroToStart(month.toString())] }
+                { getMonthByLocale(month, year, locale)}
             </div>
             <table className='table'>
                 <thead className='table__header'>

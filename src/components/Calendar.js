@@ -1,8 +1,11 @@
 import { getFullDateByLocale, getMonthsToRender } from "../utils/helpers";
 import Month from "./Month";
 import '../sass/calendar.scss';
+import { LocaleContext } from "../context/localeContext";
 
 const Calendar = props => {
+
+    const locale = 'es';
 
     const { numberOfMonths } = props;
 
@@ -12,12 +15,14 @@ const Calendar = props => {
     const monthsToRender = getMonthsToRender(month, year, numberOfMonths);
 
     return(
-        <div className="calendar">
-            {/* <h2>{getFullDateByLocale(today, 'ru')}</h2> */}
-            {
-                monthsToRender.map(({ month, year }) => <Month key={month+year} month={month} year={year} />)
-            }
-        </div>
+        <LocaleContext.Provider value={locale}>
+            <div className="calendar">
+                {/* <h2>{getFullDateByLocale(today, 'ru')}</h2> */}
+                {
+                    monthsToRender.map(({ month, year }) => <Month key={month+year} month={month} year={year} />)
+                }
+            </div>
+        </LocaleContext.Provider>
     )
 }
 
