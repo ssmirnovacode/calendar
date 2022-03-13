@@ -1,7 +1,6 @@
 .table {
     text-align: center;
     border-spacing: 0;
-    margin: 3rem;
 }
 
 /* .table__header {
@@ -17,11 +16,24 @@
     border: 1px solid grey;
     margin: 0;
     padding: 5px;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
 }
 
 .table__td:hover {
     background-color: grey;
     cursor: pointer;
+}
+
+.month {
+    display: block;
+}
+.month__header {
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.disabled {
+    color: rgb(189, 186, 186);
 }
