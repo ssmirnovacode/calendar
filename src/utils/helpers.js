@@ -9,9 +9,9 @@ export const addZeroToStart = str => +str > 9 ? str : '0'+str;
 
 export const getDateString = (year, month, day) => `${year}-${addZeroToStart(month)}-${addZeroToStart(day)}`;
 
-export const getNextMonthYear = (month, year) =>  month === 12 ? { month: 1, year: year + 1 } : { month: month + 1, year };
+export const getNextMonthYear = (month, year) =>  +month === 12 ? { month: 1, year: year + 1 } : { month: +month + 1, year };
 
-export const getPrevMonthYear = (month, year) => month === 1 ? { month: 12, year: year - 1 } : { month: month -1 , year };
+export const getPrevMonthYear = (month, year) => +month === 1 ? { month: 12, year: year - 1 } : { month: +month -1 , year };
 
 export const getFullDateByLocale = (dateObj, locale) => {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };

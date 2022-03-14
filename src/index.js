@@ -5,7 +5,7 @@ import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Calendar numberOfMonths={6} />
+    <Calendar numberOfMonths={6} arrows={true} />
   </React.StrictMode>,
   document.getElementById('root')
 );

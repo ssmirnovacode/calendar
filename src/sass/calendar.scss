@@ -1,6 +1,27 @@
 .calendar {
-    display: flex;
-    gap: 2rem;
-    margin: 2rem;
-    flex-wrap: wrap;
+    position: relative;
+    &__body {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        border: 1px solid grey;
+        margin: 1rem;
+        flex-wrap: wrap;
+    }
+    &__arrows {
+        &--next, &--prev {
+            position: absolute;
+            top: 1rem;
+            border: 1px solid grey;
+            padding: .5rem;
+            background-color: white;
+            cursor: pointer;
+        }
+        &--next {
+            right: 3rem;
+        }
+        &--prev {
+            left: 3rem;
+        }
+    }
 }
