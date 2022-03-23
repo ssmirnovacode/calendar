@@ -2,7 +2,7 @@ import { getMonthsToRender, getNextMonthYear, getPrevMonthYear } from "../utils/
 import Month from "./Month";
 import '../sass/calendar.scss';
 import { LocaleContext } from "../context/localeContext";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const Calendar = props => {
 
@@ -13,12 +13,18 @@ const Calendar = props => {
     const today = new Date();
     const [ year, month, day ] = today.toISOString().split('T')[0].split('-');
 
-    const [ currentBox, setCurrentBox ] = useState({ month, year})
+    const [ currentBox, setCurrentBox ] = useState({ month, year});
 
-    const [ monthsToRender, setMonthsToRender ] = useState(getMonthsToRender(month, year, numberOfMonths));
+    const initialMonthsToRender = useMemo(() => getMonthsToRender(month, year, numberOfMonths), [month, year, numberOfMonths] ) ;
+
+    const [ monthsToRender, setMonthsToRender ] = useState(initialMonthsToRender);
 
     const [ startDate, setStartDate ] = useState(props.startDate);
-    const [ endDate, setEndDate ] = useState(props.endDate)
+    const [ endDate, setEndDate ] = useState(props.endDate);
+
+    useEffect(() => {
+        //console.log(currentBox)
+    })
 
     const handleMonthSelect = (e) => {
         const dayStr = e.target.id;
@@ -34,7 +40,6 @@ const Calendar = props => {
     }
 
     const handlePrevBtnClick = () => {
-        console.log('prev')
         const prevMonth = getPrevMonthYear(currentBox.month, currentBox.year).month;
         const prevYear = getPrevMonthYear(currentBox.month, currentBox.year).year;
         setCurrentBox({ month: prevMonth, year: prevYear})
@@ -42,7 +47,6 @@ const Calendar = props => {
     }
 
     const handleNextBtnClick = () => {
-        console.log('next')
         const nextMonth = getNextMonthYear(currentBox.month, currentBox.year).month;
         const nextYear = getNextMonthYear(currentBox.month, currentBox.year).year;
         
@@ -62,7 +66,8 @@ const Calendar = props => {
         }
     }
 
-    console.log('start', startDate, 'end', endDate)
+    /// console.log('start', startDate, 'end', endDate);
+
     return(
         <LocaleContext.Provider value={locale}>
             <div className="calendar">
@@ -70,7 +75,7 @@ const Calendar = props => {
                 <div className="calendar__body">
                     {
                         monthsToRender.map(({ month, year }) => <Month 
-                                                                    key={month+year} 
+                                                                    key={month.toString()+year.toString()+Date.now()} 
                                                                     month={month} 
                                                                     year={year} 
                                                                     handleMonthSelect={handleMonthSelect}

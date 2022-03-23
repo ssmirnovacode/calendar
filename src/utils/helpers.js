@@ -1,24 +1,25 @@
 // To do
 // 1. refactor with getDateSrting
 
-
-
-export const cutZeroFromTheStart = str =>  +str > 9 ? str : str[1];
-
-export const addZeroToStart = str => +str > 9 ? str : '0'+str;
+export const addZeroToStart = str => !str ? undefined : +str > 9 ? str : '0'+str;
 
 export const getDateString = (year, month, day) => `${year}-${addZeroToStart(month)}-${addZeroToStart(day)}`;
 
-export const getNextMonthYear = (month, year) =>  +month === 12 ? { month: 1, year: year + 1 } : { month: +month + 1, year };
+export const getNextMonthYear = (month, year) => (+month < 1 || +month > 12 || !month || !year) ? 
+                                                undefined :  +month === 12 ? { month: 1, year: +year + 1 } : 
+                                                { month: +month + 1, year };
 
-export const getPrevMonthYear = (month, year) => +month === 1 ? { month: 12, year: year - 1 } : { month: +month -1 , year };
+export const getPrevMonthYear = (month, year) => (+month < 1 || +month > 12 || !month || !year) ? 
+                                                undefined :  +month === 1 ? { month: 12, year: +year - 1 } : 
+                                                { month: +month -1 , year };
 
-export const getFullDateByLocale = (dateObj, locale) => {
+export const getFullDateByLocale = (dateObj, locale='en') => {
+    if ( !dateObj || isNaN(dateObj.getTime())) return undefined;  
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     return dateObj.toLocaleDateString(locale, options)
 }
 
-export const getWeekdaysByLocale = (week, month, year, locale) => {
+export const getWeekdaysByLocale = (week, month, year, locale='en') => {
     const weekdays = [];
     for (let i=0; i < week.length; i++) {
         const date = new Date(`${year}-${month}-${week[i]}`);
@@ -83,5 +84,6 @@ export const getMonthsToRender = (currentMonth, currentYear, monthsToRender) => 
         nextYear = getNextMonthYear(nextMonth, nextYear).year;
         i++;
     }
+    //console.log(monthsArr)
     return monthsArr
 }

@@ -32,10 +32,12 @@ const Month = props => {
         return classes;
     }
 
+    console.log(getFullDateByLocale(new Date('2022-03-21')))
+
     return(
         <div className="month">
             <div className="month__header">
-                { getMonthByLocale(month, year, locale)}
+                 <span>{getMonthByLocale(month, year, locale)}</span> <span>{year}</span> 
             </div>
             <table className='table'>
                 <thead className='table__header'>
