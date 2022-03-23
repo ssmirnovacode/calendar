@@ -10,6 +10,8 @@ const Month = props => {
 
     const daysArray = getDaysArray(month, year);
 
+    console.log(daysArray)
+
     const monthMatrix = getMonthMatrix(daysArray);
 
     const weekdays = getWeekdaysByLocale(monthMatrix[1], month, year, locale)
@@ -32,7 +34,6 @@ const Month = props => {
         return classes;
     }
 
-    console.log(getFullDateByLocale(new Date('2022-03-21')))
 
     return(
         <div className="month">

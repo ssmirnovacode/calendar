@@ -1,7 +1,7 @@
 // To do
 // 1. refactor with getDateSrting
 
-export const addZeroToStart = str => !str ? undefined : +str > 9 ? str : '0'+str;
+export const addZeroToStart = str => !str ? undefined : +str > 9 ? str : '0'+(+str);
 
 export const getDateString = (year, month, day) => `${year}-${addZeroToStart(month)}-${addZeroToStart(day)}`;
 
@@ -18,8 +18,9 @@ export const getFullDateByLocale = (dateObj, locale='en') => {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     return dateObj.toLocaleDateString(locale, options)
 }
-
+//  getting weekday names for tabe header
 export const getWeekdaysByLocale = (week, month, year, locale='en') => {
+    if (!week || week.length !== 7 || !month || !year) return [];
     const weekdays = [];
     for (let i=0; i < week.length; i++) {
         const date = new Date(`${year}-${month}-${week[i]}`);
@@ -28,14 +29,16 @@ export const getWeekdaysByLocale = (week, month, year, locale='en') => {
     return weekdays;
 }
 
-export const getMonthByLocale = (month, year, locale) => {
+export const getMonthByLocale = (month, year, locale='en') => {
+    if (!month || !year) return undefined;
     const dateObj = new Date(`${year}-${month}-01`);
     return dateObj.toLocaleDateString(locale, { month: 'long'})
 }
 
-export const getDaysInMonth = (month, year) => new Date(year, month, 0).getDate();
+export const getDaysInMonth = (month, year) => (!month || +month < 0 || +month > 12 || !year ) ? undefined : new Date(year, month, 0).getDate();
 
 export const getDaysArray = (month, year) => {
+    if ((!month || +month < 0 || +month > 12 || !year )) return [];
     const prevMonth = getPrevMonthYear(month, year).month;
     const prevYear = getPrevMonthYear(month, year).year;
     const daysInPrevMonth = getDaysInMonth(prevMonth, prevYear) // getDaysInMonth(month-1, year);
@@ -62,6 +65,7 @@ export const getDaysArray = (month, year) => {
 }
 
 export const getMonthMatrix = (arr) => {
+    if (!arr || arr.length < 28 || arr.length%7 > 0) return []
     const matrix = [];
     
     for (let i = 0; i < arr.length; i += 7) {
@@ -74,6 +78,9 @@ export const getMonthMatrix = (arr) => {
 
 
 export const getMonthsToRender = (currentMonth, currentYear, monthsToRender) => {
+    if (!currentMonth || +currentMonth < 0 || +currentMonth > 12 ||
+         !currentYear || !monthsToRender || typeof monthsToRender !== 'number') return [];
+         
     const monthsArr = [{ month: +currentMonth, year: +currentYear}];
     let nextMonth = +currentMonth;
     let nextYear = +currentYear
