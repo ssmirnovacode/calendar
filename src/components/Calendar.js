@@ -6,9 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 
 const Calendar = props => {
 
-    const locale = 'es';
-
-    const { numberOfMonths, arrows, startDate, endDate, onChange: setDates } = props;
+    const { numberOfMonths, arrows, startDate, endDate, onChange: setDates, locale='en-US' } = props;
     
     const initialDate = startDate ? startDate : new Date();
     const [ year, month, day ] = initialDate.toISOString().split('T')[0].split('-');

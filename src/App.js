@@ -3,7 +3,9 @@ import Calendar from "./components/Calendar";
 
 const App = () => {
 
-    const [ selectedDates, setSelectedDates ] = useState({ })
+    const [ selectedDates, setSelectedDates ] = useState({});
+
+    const LOCALE = 'es-ES'
 
     return(
         <>
@@ -11,11 +13,12 @@ const App = () => {
         <div>End: {selectedDates.endDate?.toISOString()} </div>
 
         <Calendar 
-            numberOfMonths={6} 
+            numberOfMonths={2} 
             arrows={true} 
             startDate={selectedDates.startDate} 
             endDate={selectedDates.endDate} 
             onChange={setSelectedDates} 
+            locale={LOCALE}
             />
         </>
     )
