@@ -1,6 +1,8 @@
 // To do
 // 1. refactor with getDateSrting
 
+export const getShortDateString = date => date?.toISOString()?.slice(0,10);
+
 export const addZeroToStart = str => !str ? undefined : +str > 9 ? str : '0'+(+str);
 
 export const getDateString = (year, month, day) => `${year}-${addZeroToStart(month)}-${addZeroToStart(day)}`;
@@ -91,6 +93,5 @@ export const getMonthsToRender = (currentMonth, currentYear, monthsToRender) => 
         nextYear = year;
         i++;
     }
-    //console.log(monthsArr)
     return monthsArr
 }

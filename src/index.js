@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Calendar from './components/Calendar';
+import App from './App';
 import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Calendar numberOfMonths={6} arrows={true} />
+    
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

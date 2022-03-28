@@ -55,7 +55,7 @@ const Month = props => {
                                                             id={getDateString(year, month, day)} 
                                                             key={month+day+year}
                                                             onClick={getTableCellClass(week, day, j).indexOf('disabled') > 0 ? 
-                                                                    () => {} : props.handleMonthSelect}
+                                                                    () => {} : props.handleDaySelect}
                                                             >
                                                                 {day}
                                                             </td>)

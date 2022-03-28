@@ -1,4 +1,4 @@
-import { getMonthsToRender, getNextMonthYear, getPrevMonthYear } from "../utils/helpers";
+import { getMonthsToRender, getNextMonthYear, getPrevMonthYear, getShortDateString } from "../utils/helpers";
 import Month from "./Month";
 import '../sass/calendar.scss';
 import { LocaleContext } from "../context/localeContext";
@@ -8,10 +8,10 @@ const Calendar = props => {
 
     const locale = 'es';
 
-    const { numberOfMonths, arrows } = props;
+    const { numberOfMonths, arrows, startDate, endDate, onChange: setDates } = props;
     
-    const today = new Date();
-    const [ year, month, day ] = today.toISOString().split('T')[0].split('-');
+    const initialDate = startDate ? startDate : new Date();
+    const [ year, month, day ] = initialDate.toISOString().split('T')[0].split('-');
 
     const [ currentBox, setCurrentBox ] = useState({ month, year});
 
@@ -19,37 +19,25 @@ const Calendar = props => {
 
     const [ monthsToRender, setMonthsToRender ] = useState(initialMonthsToRender);
 
-    const [ startDate, setStartDate ] = useState(props.startDate);
-    const [ endDate, setEndDate ] = useState(props.endDate);
-
     useEffect(() => {
-        //console.log(currentBox)
-        //console.log(getNextMonthYear(12, 2022).year)
+        //console.log(startDate)
     })
 
-    const handleMonthSelect = (e) => {
-        const dayStr = e.target.id;
-        if (startDate && endDate) {
-            setStartDate(dayStr); 
-            setEndDate('');
-        }
-        else if (!startDate) {
-            setStartDate(dayStr)
-        }
-        else setEndDate(dayStr);
-        
+    const handleDaySelect = (e) => {
+        const day = new Date(e.target.id);
+        startDate && endDate ? setDates({ startDate: day, endDate: undefined}) :
+        !startDate ? setDates(state => ({ startDate: day, endDate: state.endDate})) :
+        setDates(state => ({ startDate: state.startDate, endDate: day}));
     }
 
     const handlePrevBtnClick = () => {
-        const prevMonth = getPrevMonthYear(currentBox.month, currentBox.year).month;
-        const prevYear = getPrevMonthYear(currentBox.month, currentBox.year).year;
+        const { month: prevMonth, year: prevYear } = getPrevMonthYear(currentBox.month, currentBox.year);
         setCurrentBox({ month: prevMonth, year: prevYear})
         setMonthsToRender(getMonthsToRender(prevMonth, prevYear, numberOfMonths));
     }
 
     const handleNextBtnClick = () => {
-        const nextMonth = getNextMonthYear(currentBox.month, currentBox.year).month;
-        const nextYear = getNextMonthYear(currentBox.month, currentBox.year).year;
+        const { month: nextMonth, year: nextYear } = getNextMonthYear(currentBox.month, currentBox.year);
         
         setCurrentBox({ month: nextMonth, year: nextYear})
         setMonthsToRender(getMonthsToRender(nextMonth, nextYear, numberOfMonths));
@@ -67,8 +55,6 @@ const Calendar = props => {
         }
     }
 
-    /// console.log('start', startDate, 'end', endDate);
-
     return(
         <LocaleContext.Provider value={locale}>
             <div className="calendar">
@@ -79,9 +65,9 @@ const Calendar = props => {
                                                                     key={month.toString()+year.toString()+Date.now()} 
                                                                     month={month} 
                                                                     year={year} 
-                                                                    handleMonthSelect={handleMonthSelect}
-                                                                    startDate={startDate}
-                                                                    endDate={endDate}
+                                                                    handleDaySelect={handleDaySelect}
+                                                                    startDate={getShortDateString(startDate)}
+                                                                    endDate={getShortDateString(endDate)}
                                                                     />)
                     }
                 </div>
