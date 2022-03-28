@@ -24,6 +24,7 @@ const Calendar = props => {
 
     useEffect(() => {
         //console.log(currentBox)
+        //console.log(getNextMonthYear(12, 2022).year)
     })
 
     const handleMonthSelect = (e) => {

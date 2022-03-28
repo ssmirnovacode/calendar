@@ -1,4 +1,4 @@
-import { getDaysArray,  getMonthMatrix, getFullDateByLocale, addZeroToStart, getMonthByLocale, getWeekdaysByLocale, getDateString } from "../utils/helpers";
+import { getDaysArray,  getMonthMatrix, getMonthByLocale, getWeekdaysByLocale, getDateString } from "../utils/helpers";
 import '../sass/month.scss';
 import { useContext } from "react";
 import { LocaleContext } from "../context/localeContext";
@@ -9,8 +9,6 @@ const Month = props => {
     const locale = useContext(LocaleContext);
 
     const daysArray = getDaysArray(month, year);
-
-    console.log(daysArray)
 
     const monthMatrix = getMonthMatrix(daysArray);
 
@@ -56,7 +54,8 @@ const Month = props => {
                                     week.map((day, j) => <td className={getTableCellClass(week, day, j)} 
                                                             id={getDateString(year, month, day)} 
                                                             key={month+day+year}
-                                                            onClick={getTableCellClass(week, day, j).indexOf('disabled') > 0 ? () => {} : props.handleMonthSelect}
+                                                            onClick={getTableCellClass(week, day, j).indexOf('disabled') > 0 ? 
+                                                                    () => {} : props.handleMonthSelect}
                                                             >
                                                                 {day}
                                                             </td>)

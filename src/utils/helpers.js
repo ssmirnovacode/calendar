@@ -39,8 +39,7 @@ export const getDaysInMonth = (month, year) => (!month || +month < 0 || +month >
 
 export const getDaysArray = (month, year) => {
     if ((!month || +month < 0 || +month > 12 || !year )) return [];
-    const prevMonth = getPrevMonthYear(month, year).month;
-    const prevYear = getPrevMonthYear(month, year).year;
+    const { month: prevMonth, year: prevYear } = getPrevMonthYear(month, year);
     const daysInPrevMonth = getDaysInMonth(prevMonth, prevYear) // getDaysInMonth(month-1, year);
     const daysInMonth = getDaysInMonth(month, year);
     const firstDayWeekday = new Date(`${year}-${month}-01`).getDay();
@@ -80,15 +79,16 @@ export const getMonthMatrix = (arr) => {
 export const getMonthsToRender = (currentMonth, currentYear, monthsToRender) => {
     if (!currentMonth || +currentMonth < 0 || +currentMonth > 12 ||
          !currentYear || !monthsToRender || typeof monthsToRender !== 'number') return [];
-         
+
     const monthsArr = [{ month: +currentMonth, year: +currentYear}];
     let nextMonth = +currentMonth;
     let nextYear = +currentYear
     let i=1;
     while( i < monthsToRender ) {
-        monthsArr.push(getNextMonthYear(nextMonth, nextYear));
-        nextMonth = getNextMonthYear(nextMonth, nextYear).month;
-        nextYear = getNextMonthYear(nextMonth, nextYear).year;
+        const { month, year } = getNextMonthYear(nextMonth, nextYear);
+        monthsArr.push({month, year});
+        nextMonth = month;
+        nextYear = year;
         i++;
     }
     //console.log(monthsArr)

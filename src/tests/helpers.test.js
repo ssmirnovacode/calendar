@@ -133,6 +133,16 @@ test('getMonthsToRender naive use', () => {
     const monthsArr2 = getMonthsToRender(1, 2023, 4);
     expect(monthsArr2[3]['month']).toBe(4);
     expect(monthsArr2[3]['year']).toBe(2023);
+
+    // eslint-disable-next-line testing-library/render-result-naming-convention
+    const monthsArr3 = getMonthsToRender(8, 2022, 6);
+    expect(monthsArr3[5]['month']).toBe(1);
+    expect(monthsArr3[5]['year']).toBe(2023); // 2024
+
+    // eslint-disable-next-line testing-library/render-result-naming-convention
+    const monthsArr4 = getMonthsToRender(12, 2022, 6);
+    expect(monthsArr4[2]['month']).toBe(2);
+    expect(monthsArr4[2]['year']).toBe(2023); // 2022
 });
 
 test('getMonthsToRender invalid use', () => {
