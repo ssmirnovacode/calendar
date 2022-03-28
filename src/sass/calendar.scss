@@ -1,20 +1,27 @@
+@import './theme.scss';
+
 .calendar {
+    font-family: var(--fontFamily);
+    font-size: var(--fz);
+    color: var(--color);
     position: relative;
+    background-color: var(--bgc);
+    max-width: var(--maxWidth);
     &__body {
         display: flex;
         justify-content: center;
-        gap: 2rem;
-        border: 1px solid grey;
-        margin: 1rem;
+        gap: var(--gap);
+        border: 1px solid var(--borderColor);
+        padding: var(--padding);
         flex-wrap: wrap;
     }
     &__arrows {
         &--next, &--prev {
             position: absolute;
             top: 1rem;
-            border: 1px solid grey;
+            border: 1px solid var(--borderColor);
             padding: .5rem;
-            background-color: white;
+            background-color: var(--bgc);
             cursor: pointer;
         }
         &--next {

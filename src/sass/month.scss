@@ -1,6 +1,8 @@
+@import './theme.scss';
+
 .table {
     text-align: center;
-    border-spacing: 0;
+    //border-spacing: 0;
 }
 
 thead.table__header tr {
@@ -8,12 +10,12 @@ thead.table__header tr {
 } 
 
 .table__body {
-    font-style: italic;
+    //font-style: italic;
 }
 
 .table__td {
     text-align: center;
-    border: 1px solid grey;
+    border: 1px solid var(--borderColor);
     margin: 0;
     padding: 5px;
     width: 30px;
@@ -21,7 +23,7 @@ thead.table__header tr {
 }
 
 .table__td:hover {
-    background-color: grey;
+    background-color: var(--hoverBg);
     cursor: pointer;
 }
 
@@ -36,18 +38,20 @@ thead.table__header tr {
 }
 
 .disabled {
-    color: rgb(189, 186, 186);
+    color: var(--disabledColor);
     cursor: default;
     &:hover {
         cursor: default;
-        background-color: white;
+        background-color: var(--disabledBg);
     }
 }
 
 .selected {
-    background-color: rgb(124, 184, 124);
+    background-color: var(--selectedBg);
+    color: var(--selectedColor);
 }
 
 .between {
-    background-color: rgb(205, 240, 205);;
+    background-color: var(--betweenBg);
+    color: var(--betweenColor);
 }

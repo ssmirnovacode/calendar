@@ -3,10 +3,11 @@ import Month from "./Month";
 import '../sass/calendar.scss';
 import { LocaleContext } from "../context/localeContext";
 import { useEffect, useMemo, useState } from "react";
+import { initTheme } from "../utils/theme";
 
 const Calendar = props => {
 
-    const { numberOfMonths, arrows, startDate, endDate, onChange: setDates, locale='en-US' } = props;
+    const { numberOfMonths, arrows, startDate, endDate, onChange: setDates, locale='en-US', theme } = props;
     
     const initialDate = startDate ? startDate : new Date();
     const [ year, month, day ] = initialDate.toISOString().split('T')[0].split('-');
@@ -18,8 +19,8 @@ const Calendar = props => {
     const [ monthsToRender, setMonthsToRender ] = useState(initialMonthsToRender);
 
     useEffect(() => {
-        //console.log(startDate)
-    })
+        theme && initTheme(theme)
+    }, [])
 
     const handleDaySelect = (e) => {
         const day = new Date(e.target.id);

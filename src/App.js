@@ -5,7 +5,15 @@ const App = () => {
 
     const [ selectedDates, setSelectedDates ] = useState({});
 
-    const LOCALE = 'es-ES'
+    const LOCALE = 'es-ES';
+
+    const SETTINGS = {
+        color: 'black',
+        bgc: 'white',
+        borderColor: 'grey',
+        hoverColor: 'white',
+        hoverBg: 'grey'
+    }
 
     return(
         <>
@@ -19,6 +27,7 @@ const App = () => {
             endDate={selectedDates.endDate} 
             onChange={setSelectedDates} 
             locale={LOCALE}
+            theme={SETTINGS}
             />
         </>
     )

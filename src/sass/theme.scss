@@ -1,0 +1,27 @@
+:root {
+    --color: black;
+    --bgc: white;
+
+    --borderColor: rgb(189, 186, 186);
+
+    --hoverColor: white;
+    --hoverBg: grey;
+
+    --selectedColor: black;
+    --selectedBg: rgb(124, 184, 124);
+
+    --betweenColor: black;
+    --betweenBg: rgb(205, 240, 205);
+
+    --disabledColor:rgb(189, 186, 186);
+    --disabledBg: white;
+
+    // Typography
+    --fontFamily: 'Arial', sans-serif;
+    --fz: 16px;
+
+    // box-sizing
+    --maxWidth: 800px;
+    --padding: 2rem;
+    --gap: 2rem;
+}
