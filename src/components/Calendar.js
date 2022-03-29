@@ -8,8 +8,8 @@ import { initTheme } from "../utils/theme";
 const Calendar = props => {
 
     const { 
-        numberOfMonths, 
-        arrows, 
+        numberOfMonths=2, 
+        arrows=true, 
         startDate, 
         endDate, 
         onChange: setDates, 

@@ -1,20 +1,28 @@
 {
-  "name": "calendar",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@ssmirnovacode/calendar",
+  "description": "Minimalistic and customizeable Calendar React component",
+  "author": "ssmirnovacode",
+  "keywords": ["react", "components", "ui", "calendar", "datepicker"],
+  "version": "0.1.1",
+  "private": false,
+  "main": "dist/components/index.js",
+  "module": "dist/components/index.js",
+  "files": [ "dist", "README.md" ],
+  "repository": {
+      "type": "git",
+      "url": "git+https://github.com/ssmirnovacode/calendar.git"
+  },
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "5.0.0",
     "sass": "^1.49.9",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "del dist && babel src --out-dir dist --copy-files",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -37,6 +45,11 @@
     ]
   },
   "devDependencies": {
-    "jest": "^27.5.1"
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.8",
+    "@babel/preset-env": "^7.16.11",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "5.0.0"
   }
 }
