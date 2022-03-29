@@ -2,7 +2,7 @@ import { getMonthsToRender, getNextMonthYear, getPrevMonthYear, getShortDateStri
 import Month from "./Month";
 import '../sass/calendar.scss';
 import { LocaleContext } from "../context/localeContext";
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { initTheme } from "../utils/theme";
 
 const Calendar = props => {

@@ -1,6 +1,6 @@
 import { getDaysArray,  getMonthMatrix, getMonthByLocale, getWeekdaysByLocale, getDateString } from "../utils/helpers";
 import '../sass/month.scss';
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { LocaleContext } from "../context/localeContext";
 
 const Month = props => {
