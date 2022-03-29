@@ -24,9 +24,21 @@ const Calendar = props => {
 
     const handleDaySelect = (e) => {
         const day = new Date(e.target.id);
-        startDate && endDate ? setDates({ startDate: day, endDate: undefined}) :
-        !startDate ? setDates(state => ({ startDate: day, endDate: state.endDate})) :
-        setDates(state => ({ startDate: state.startDate, endDate: day}));
+        if (!day || isNaN(day.getTime())) return;
+        // if same day is chosen
+        else if ( day - startDate === 0 || day - endDate === 0) {
+            return
+        }
+        else if (startDate && !endDate) {
+            startDate - day > 0 ? setDates(state => ({ startDate: day, endDate: state.startDate})) : 
+            setDates(state => ({ startDate: state.startDate, endDate: day}))
+        }
+        else if (!startDate && endDate) {
+            endDate - day > 0 ? setDates(state => ({ startDate: day, endDate: state.endDate})) : 
+            setDates(state => ({ startDate: state.endDate, endDate: day}))
+        }
+        // either both defined or both undefined
+        else setDates({ startDate: day, endDate: undefined}); 
     }
 
     const handlePrevBtnClick = () => {

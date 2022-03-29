@@ -7,10 +7,11 @@ const App = () => {
 
     const LOCALE = 'es-ES';
 
+    // or maybe just overriding theme.scss?.. (to be turned into just css perhaps)
     const SETTINGS = {
         color: 'black',
         bgc: 'white',
-        borderColor: 'grey',
+        borderColor: 'white',
         hoverColor: 'white',
         hoverBg: 'grey'
     }
