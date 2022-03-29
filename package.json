@@ -2,15 +2,24 @@
   "name": "@ssmirnovacode/calendar",
   "description": "Minimalistic and customizeable Calendar React component",
   "author": "ssmirnovacode",
-  "keywords": ["react", "components", "ui", "calendar", "datepicker"],
-  "version": "0.1.1",
+  "keywords": [
+    "react",
+    "components",
+    "ui",
+    "calendar",
+    "datepicker"
+  ],
+  "version": "0.1.2",
   "private": false,
   "main": "dist/components/index.js",
   "module": "dist/components/index.js",
-  "files": [ "dist", "README.md" ],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "repository": {
-      "type": "git",
-      "url": "git+https://github.com/ssmirnovacode/calendar.git"
+    "type": "git",
+    "url": "git+https://github.com/ssmirnovacode/calendar.git"
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
