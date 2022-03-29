@@ -12,8 +12,8 @@
         justify-content: center;
         gap: var(--gap);
         border: 1px solid var(--borderColor);
-        padding: var(--padding);
         flex-wrap: wrap;
+        padding: var(--padding);
     }
     &__arrows {
         &--next, &--prev {
@@ -29,6 +29,24 @@
         }
         &--prev {
             left: 3rem;
+        }
+    }
+    &__footer {
+        &--btn {
+            background-color: var(--bgc);
+            border: 1px solid transparent;
+            color: var(--color);
+            padding: .5rem;
+            border-radius: 5px;
+            position: absolute;
+            right: calc(var(--padding) + var(--gap));
+            bottom: 0;
+            &:hover {
+                // background-color: var(--hoverBg);
+                //border: 1px solid var(--danger);
+                color: var(--danger); 
+                cursor: pointer;
+            }
         }
     }
 }

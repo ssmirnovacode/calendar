@@ -3,11 +3,14 @@ import Calendar from "./components/Calendar";
 
 const App = () => {
 
-    const [ selectedDates, setSelectedDates ] = useState({});
+    const [ selectedDates, setSelectedDates ] = useState({
+        startDate: new Date(2022, 2, 21),
+        endDate: new Date()
+    });
 
     const LOCALE = 'es-ES';
 
-    // or maybe just overriding theme.scss?.. (to be turned into just css perhaps)
+    // or maybe just overriding theme.scss?.. (to be turned into just css perhaps) or both options?..
     const SETTINGS = {
         color: 'black',
         bgc: 'white',
@@ -29,6 +32,7 @@ const App = () => {
             onChange={setSelectedDates} 
             locale={LOCALE}
             theme={SETTINGS}
+            clearDatesBtn
             />
         </>
     )

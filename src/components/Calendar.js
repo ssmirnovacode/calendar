@@ -7,7 +7,16 @@ import { initTheme } from "../utils/theme";
 
 const Calendar = props => {
 
-    const { numberOfMonths, arrows, startDate, endDate, onChange: setDates, locale='en-US', theme } = props;
+    const { 
+        numberOfMonths, 
+        arrows, 
+        startDate, 
+        endDate, 
+        onChange: setDates, 
+        locale='en-US', 
+        theme,
+        clearDatesBtn=true 
+    } = props;
     
     const initialDate = startDate ? startDate : new Date();
     const [ year, month, day ] = initialDate.toISOString().split('T')[0].split('-');
@@ -81,7 +90,17 @@ const Calendar = props => {
                                                                     endDate={getShortDateString(endDate)}
                                                                     />)
                     }
+                    
                 </div>
+                <div className="calendar__footer">
+                    { clearDatesBtn &&
+                        <button className="calendar__footer--btn" 
+                            onClick={() => setDates({ startDate: undefined, endDate: undefined})}
+                        >
+                            <span>&times;</span> Clear dates
+                        </button>
+                    }
+                    </div>
             </div>
         </LocaleContext.Provider>
     )
