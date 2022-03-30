@@ -53,18 +53,21 @@ Following properties can be passed to Calendar component:
 - `locale` locale string ('en-US' by default)
 - `theme` an object with specific keys defining the theme for the component to override default styles
 - `clearDatesBtn` boolean indicating if to render 'Clear dates' button or numberOfMonths
+- `vertical` boolean enabling vertical layout without arrows (false by default). Enabled for XS and S screens automatically as part of responsive design.
 
-### theme
+### Theme
 
 Additional styles can be added by custom CSS.
 Default style variables can be modified by passing an object with specific keys as in the following example (also suggesting a nice darkmode theme palette):
 
 ```js
+    // nice dark mode theme settings
     const FONT_COLOR = '#E9A6A6';
     const BGC = '#1F1D36';
     const BGC_OTHER = '#3F3351';
     const ACCENT = '#864879';
 
+    // configuration object to be passed as 'theme' prop
     const DARK_THEME = {
         color: FONT_COLOR, 
         bgc: BGC, 
@@ -90,13 +93,20 @@ Values are to be passed as usual CSS values
 
 ## Themes
 
+Dark mode lila:
+```js
+    const FONT_COLOR = '#E9A6A6';
+    const BGC = '#1F1D36';
+    const BGC_OTHER = '#3F3351';
+    const ACCENT = '#864879';
+```
+
 Pink Pastel:
 ```js
     const FONT_COLOR = '#874356';
     const BGC = '#F6E7D8';
     const BGC_OTHER = '#F68989';
     const ACCENT = '#C65D7B';
-
 ```
 
 ## links

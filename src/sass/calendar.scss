@@ -7,6 +7,7 @@
     position: relative;
     background-color: var(--bgc);
     max-width: var(--maxWidth);
+    width: fit-content;
     &__body {
         display: flex;
         justify-content: center;
@@ -14,6 +15,12 @@
         border: 1px solid var(--borderColor);
         flex-wrap: wrap;
         padding: var(--padding);
+        &.vertical {
+            flex-direction: column;
+        }
+        @media (max-width: 720px) {
+            flex-direction: column;
+        }
     }
     &__arrows {
         &--next, &--prev {
@@ -28,6 +35,9 @@
             &:hover {
                 color: var(--hoverColor);
                 background-color: var(--hoverBg);
+            }
+            @media (max-width: 720px) {
+                display: none;
             }
         }
         &--next {

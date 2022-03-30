@@ -49,6 +49,7 @@ const App = () => {
             locale={LOCALE}
             //theme={DARK_THEME}
             clearDatesBtn
+            //vertical
             />
         </>
     )

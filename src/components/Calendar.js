@@ -15,7 +15,8 @@ const Calendar = props => {
         onChange: setDates, 
         locale='en-US', 
         theme,
-        clearDatesBtn=true 
+        clearDatesBtn=true,
+        vertical=false 
     } = props;
     
     const initialDate = startDate ? startDate : new Date();
@@ -65,7 +66,7 @@ const Calendar = props => {
     }
 
     const renderArrows = () => {
-        if (arrows) {
+        if (arrows && !vertical) {
             return (
                 <div className="calendar__arrows">
                     <button className="calendar__arrows--prev" onClick={handlePrevBtnClick}>&#8592;</button>
@@ -79,7 +80,7 @@ const Calendar = props => {
         <LocaleContext.Provider value={locale}>
             <div className="calendar">
                 { renderArrows() }
-                <div className="calendar__body">
+                <div className={ vertical? "calendar__body vertical" : "calendar__body"}>
                     {
                         monthsToRender.map(({ month, year }) => <Month 
                                                                     key={month.toString()+year.toString()+Date.now()} 
