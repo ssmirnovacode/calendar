@@ -20,9 +20,15 @@
             position: absolute;
             top: 1rem;
             border: 1px solid var(--borderColor);
+            border-radius: 3px;
             padding: .5rem;
+            color: var(--color);
             background-color: var(--bgc);
             cursor: pointer;
+            &:hover {
+                color: var(--hoverColor);
+                background-color: var(--hoverBg);
+            }
         }
         &--next {
             right: 3rem;

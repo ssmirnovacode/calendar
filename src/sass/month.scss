@@ -24,6 +24,7 @@ thead.table__header tr {
 
 .table__td:hover {
     background-color: var(--hoverBg);
+    color: var(--hoverColor);
     cursor: pointer;
 }
 

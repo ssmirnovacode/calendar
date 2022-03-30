@@ -1,23 +1,23 @@
 :root {
     // colors
-    --color: black;
+    --color: #874356;
     --bgc: white;
 
     --borderColor: white;
 
     --hoverColor: white;
-    --hoverBg: grey;
+    --hoverBg: #874356;
 
-    --selectedColor: black;
-    --selectedBg: rgb(124, 184, 124);
+    --selectedColor: white;
+    --selectedBg: #C65D7B;
 
-    --betweenColor: black;
-    --betweenBg: rgb(205, 240, 205);
+    --betweenColor: #874356;
+    --betweenBg: #F68989;
 
-    --disabledColor:rgb(189, 186, 186);
+    --disabledColor:white;
     --disabledBg: white;
 
-    --danger: rgb(165, 41, 41);
+    --danger: #C65D7B;
 
     // Typography
     --fontFamily: 'Arial', sans-serif;

@@ -57,23 +57,28 @@ Following properties can be passed to Calendar component:
 ### theme
 
 Additional styles can be added by custom CSS.
-Default style variables can be modified by passing an object with following keys:
+Default style variables can be modified by passing an object with specific keys as in the following example (also suggesting a nice darkmode theme palette):
 
 ```js
-    {
-        color: 'black',
-        bgc: 'white',
-        borderColor: 'white',
-        hoverColor: 'white',
-        hoverBg: 'grey',
-        selectedColor: 'black',
-        selectedBg: 'rgb(124, 184, 124)',
-        betweenColor: 'black',
-        betweenBg: 'rgb(205, 240, 205)',
-        disabledColor:'rgb(189, 186, 186)',
-        disabledBg: 'white',
-        danger: 'rgb(165, 41, 41)',
-        fontFamily: '"Arial", sans-serif',
+    const FONT_COLOR = '#E9A6A6';
+    const BGC = '#1F1D36';
+    const BGC_OTHER = '#3F3351';
+    const ACCENT = '#864879';
+
+    const DARK_THEME = {
+        color: FONT_COLOR, 
+        bgc: BGC, 
+        borderColor: BGC,
+        hoverColor: BGC,
+        hoverBg: FONT_COLOR,
+        selectedColor: BGC, 
+        selectedBg: ACCENT,
+        betweenColor: FONT_COLOR,
+        betweenBg: BGC_OTHER, 
+        disabledColor: BGC,
+        disabledBg: BGC,
+        danger: ACCENT,
+        fontFamily: '"Helvetica", sans-serif',
         fz: '16px',
         maxWidth: '800px',
         padding: '2rem',
@@ -82,6 +87,17 @@ Default style variables can be modified by passing an object with following keys
 
 ```
 Values are to be passed as usual CSS values
+
+## Themes
+
+Pink Pastel:
+```js
+    const FONT_COLOR = '#874356';
+    const BGC = '#F6E7D8';
+    const BGC_OTHER = '#F68989';
+    const ACCENT = '#C65D7B';
+
+```
 
 ## links
 GitHub repository: (https://github.com/ssmirnovacode/mini-calendar)
