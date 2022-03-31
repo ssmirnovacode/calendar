@@ -1,14 +1,22 @@
 # @ssmirnovacode/calendar
-Light-weight minimalistic Calendar component made with React.js
+
+Light-weight simple Calendar React.js component.
+
+- date formatting based on locale;
+- customizable syles;
+
 
 ## Setup
 ```
 npm install @ssmirnovacode/calendar
 ```
 
+
 ## Usage
 
 ```js
+import { Calendar } from '@ssmirnovacode/calendar';
+
 const App = () => {
 
     const [ selectedDates, setSelectedDates ] = useState({
@@ -16,12 +24,9 @@ const App = () => {
         endDate: new Date()
     });
 
-    const SETTINGS = {
+    const THEME = {
         color: '#0f1721',
-        bgc: 'white',
-        borderColor: 'white',
-        hoverColor: 'white',
-        hoverBg: 'grey'
+        bgc: 'white'
     }
 
     return(
@@ -33,15 +38,14 @@ const App = () => {
             endDate={selectedDates.endDate} 
             onChange={setSelectedDates} 
             locale={'es-ES'}
-            theme={SETTINGS}
+            theme={THEME}
             clearDatesBtn
             />
         </>
     )
 };
-
-export default App;
 ```
+
 
 ## Properties
 
@@ -55,10 +59,10 @@ Following properties can be passed to Calendar component:
 - `clearDatesBtn` boolean indicating if to render 'Clear dates' button or numberOfMonths
 - `vertical` boolean enabling vertical layout without arrows (false by default). Enabled for XS and S screens automatically as part of responsive design.
 
+
 ### Theme
 
-Additional styles can be added by custom CSS.
-Default style variables can be modified by passing an object with specific keys as in the following example (also suggesting a nice darkmode theme palette):
+Default style variables can be modified by passing an theme object with specific keys as in the following example (also suggesting a nice darkmode theme palette):
 
 ```js
     // nice dark mode theme settings
@@ -89,7 +93,9 @@ Default style variables can be modified by passing an object with specific keys 
     }
 
 ```
-Values are to be passed as usual CSS values
+Values are to be passed as usual CSS values.
+
+Additional styles can be also added by custom CSS.
 
 ## Themes
 

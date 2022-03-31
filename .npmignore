@@ -2,5 +2,11 @@
 /node_modules
 
 /public
-dist/tests
 /src
+
+dist/tests
+dist/App.js 
+dist/App.test.js 
+dist/index.css
+dist/index.js 
+dist/setupTests.js
