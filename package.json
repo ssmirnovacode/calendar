@@ -10,7 +10,7 @@
     "calendar",
     "datepicker"
   ],
-  "version": "0.4.1",
+  "version": "0.4.2",
   "private": false,
   "main": "dist/components/index.js",
   "module": "dist/components/index.js",
