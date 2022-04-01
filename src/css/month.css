@@ -1,18 +1,11 @@
-@import './theme.scss';
+@import './theme.css';
 
 .table {
     text-align: center;
-    //border-spacing: 0;
 }
-
 thead.table__header tr {
     margin-bottom: 1rem;
-} 
-
-.table__body {
-    //font-style: italic;
 }
-
 .table__td {
     text-align: center;
     border: 1px solid var(--borderColor);
@@ -21,13 +14,11 @@ thead.table__header tr {
     width: 30px;
     height: 30px;
 }
-
 .table__td:hover {
     background-color: var(--hoverBg);
     color: var(--hoverColor);
     cursor: pointer;
 }
-
 .month {
     display: block;
 }
@@ -37,21 +28,18 @@ thead.table__header tr {
     text-align: center;
     margin-bottom: 1rem;
 }
-
 .disabled {
     color: var(--disabledColor);
     cursor: default;
-    &:hover {
-        cursor: default;
-        background-color: var(--disabledBg);
-    }
 }
-
+.disabled:hover {
+    cursor: default;
+    background-color: var(--disabledBg);
+}
 .selected {
     background-color: var(--selectedBg);
     color: var(--selectedColor);
 }
-
 .between {
     background-color: var(--betweenBg);
     color: var(--betweenColor);

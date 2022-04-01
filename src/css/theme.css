@@ -1,5 +1,5 @@
 :root {
-    // colors
+    /* colors */
     --color: #874356;
     --bgc: white;
 
@@ -19,11 +19,11 @@
 
     --danger: #C65D7B;
 
-    // Typography
+    /* Typography */
     --fontFamily: 'Arial', sans-serif;
     --fz: 16px;
 
-    // box-sizing
+    /* box-sizing */
     --maxWidth: 800px;
     --padding: 2rem;
     --gap: 2rem;

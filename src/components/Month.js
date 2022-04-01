@@ -1,5 +1,5 @@
 import { getDaysArray,  getMonthMatrix, getMonthByLocale, getWeekdaysByLocale, getDateString } from "../utils/helpers";
-import '../sass/month.scss';
+import '../css/month.css';
 import React, { useContext } from "react";
 import { LocaleContext } from "../context/localeContext";
 

@@ -42,7 +42,7 @@ const App = () => {
 
         <Calendar 
             numberOfMonths={4} 
-            //arrows={true} 
+            arrows={true} 
             startDate={selectedDates.startDate} 
             endDate={selectedDates.endDate} 
             onChange={setSelectedDates} 

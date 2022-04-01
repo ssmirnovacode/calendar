@@ -3,6 +3,7 @@
 Light-weight simple Calendar React.js component.
 
 - date formatting based on **locale**;
+- number of months to be displayed can be easily changed;
 - customizable styles;
 
 ![Calendar darkmode example](https://i.ibb.co/VBp6ccg/calendar4.png)

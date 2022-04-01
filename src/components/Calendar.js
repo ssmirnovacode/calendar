@@ -1,6 +1,6 @@
 import { getMonthsToRender, getNextMonthYear, getPrevMonthYear, getShortDateString } from "../utils/helpers";
 import Month from "./Month";
-import '../sass/calendar.scss';
+import '../css/calendar.css';
 import { LocaleContext } from "../context/localeContext";
 import React, { useEffect, useMemo, useState } from "react";
 import { initTheme } from "../utils/theme";
