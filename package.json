@@ -33,7 +33,8 @@
     "start": "react-scripts start",
     "build": "del dist && babel src --out-dir dist --copy-files",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "publish": "npm publish --access=public"
   },
   "eslintConfig": {
     "extends": [

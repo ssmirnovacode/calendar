@@ -54,7 +54,7 @@ const App = () => {
 
 Following properties can be passed to Calendar component:
 - `numberOfMonths` number of months to be rendered (2 by default);
-- `arrows` boolean indicating if yu want to render previous/next arrow buttons (true by default)
+- `arrows` boolean indicating if to render previous/next arrow buttons (false by default)
 - `startDate` and `endDate` javascript Date Objects
 - `onChange` a function to be ejecuted when dates are selected
 - `locale` locale string ('en-US' by default)

@@ -9,7 +9,7 @@ const Calendar = props => {
 
     const { 
         numberOfMonths=2, 
-        arrows=true, 
+        arrows=false, 
         startDate, 
         endDate, 
         onChange: setDates, 

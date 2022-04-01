@@ -41,13 +41,13 @@ const App = () => {
         <div>End: {selectedDates.endDate?.toISOString()} </div>
 
         <Calendar 
-            numberOfMonths={2} 
-            arrows={true} 
+            numberOfMonths={4} 
+            //arrows={true} 
             startDate={selectedDates.startDate} 
             endDate={selectedDates.endDate} 
             onChange={setSelectedDates} 
-            locale={LOCALE}
-            //theme={DARK_THEME}
+            //locale={LOCALE}
+            theme={DARK_THEME}
             clearDatesBtn
             //vertical
             />
