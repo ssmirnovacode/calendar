@@ -2,8 +2,8 @@
 
 Light-weight simple Calendar React.js component.
 
-- date formatting based on locale;
-- customizable syles;
+- date formatting based on **locale**;
+- customizable styles;
 
 
 ## Setup
