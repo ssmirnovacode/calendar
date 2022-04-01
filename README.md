@@ -5,6 +5,9 @@ Light-weight simple Calendar React.js component.
 - date formatting based on **locale**;
 - customizable styles;
 
+![Calendar darkmode example](https://i.ibb.co/VBp6ccg/calendar4.png)
+
+![Calendar view example](https://i.ibb.co/WBMg6GB/calendar1.png)
 
 ## Setup
 ```
@@ -100,6 +103,9 @@ Additional styles can be also added by custom CSS.
 ## Themes
 
 Dark mode lila:
+
+![Calendar dark mode example](https://i.ibb.co/k8hHpLV/calendar2.png)
+
 ```js
     const FONT_COLOR = '#E9A6A6';
     const BGC = '#1F1D36';
@@ -108,6 +114,9 @@ Dark mode lila:
 ```
 
 Pink Pastel:
+
+![Calendar pastel theme example](https://i.ibb.co/88KfbZC/calendar3.png)
+
 ```js
     const FONT_COLOR = '#874356';
     const BGC = '#F6E7D8';
