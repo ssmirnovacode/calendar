@@ -4,10 +4,10 @@
 /public
 /src
 
-/dist/tests
-/dist/mockups
-/dist/App.js 
-/dist/App.test.js 
-/dist/index.css
-/dist/index.js 
-/dist/setupTests.js
+dist/tests
+dist/mockups
+dist/App.js 
+dist/App.test.js 
+dist/index.css
+dist/index.js 
+dist/setupTests.js
