@@ -1,4 +1,4 @@
-export const getShortDateString = date => date?.toISOString()?.slice(0,10);
+export const getShortDateString = date => date && !isNaN(date.getTime()) ? date.toISOString().slice(0,10) : undefined;
 
 export const addZeroToStart = str => !str ? undefined : +str > 9 ? str : '0'+(+str);
 
