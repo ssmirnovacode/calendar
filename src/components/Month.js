@@ -1,4 +1,4 @@
-import { getDaysArray,  getMonthMatrix, getMonthByLocale, getWeekdaysByLocale, getDateString } from "../utils/helpers";
+import { getDaysArray,  getMonthMatrix, getMonthByLocale, getWeekdaysByLocale, getDateString, isWeekend } from "../utils/helpers";
 import '../css/month.css';
 import React, { useContext } from "react";
 import { LocaleContext } from "../context/localeContext";
@@ -6,7 +6,7 @@ import { BlockedContext } from "../context/blockedContext";
 
 const Month = props => {
 
-    const { month, year, startDate, endDate } = props;
+    const { month, year, startDate, endDate, weekendsBlocked } = props;
     const locale = useContext(LocaleContext);
     const blockedDates = useContext(BlockedContext);
 
@@ -21,11 +21,12 @@ const Month = props => {
 
         const currentDate = getDateString(year, month, day);
 
-        if (week.indexOf(1) > j && monthMatrix.indexOf(week) === 0 ||
-        day < 7 && monthMatrix.indexOf(week) === monthMatrix.length-1) {
+        if ((week.indexOf(1) > j && monthMatrix.indexOf(week) === 0) ||
+        (day < 7 && monthMatrix.indexOf(week) === monthMatrix.length-1)) {
            classes += ' hidden' 
         }
-        else if (blockedDates.includes(currentDate)) {
+        else if (blockedDates.includes(currentDate) ||
+        (weekendsBlocked && isWeekend(currentDate))) {
             classes += ' blocked' 
         }
         else if (startDate === currentDate || endDate === currentDate) {

@@ -94,4 +94,6 @@ export const getMonthsToRender = (currentMonth, currentYear, monthsToRender) => 
         i++;
     }
     return monthsArr
-}
+};
+
+export const isWeekend = (dateString) => (new Date(dateString)).getDay() === 0 || (new Date(dateString)).getDay() === 6 ? true : false;
