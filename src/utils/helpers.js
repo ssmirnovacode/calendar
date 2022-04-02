@@ -1,6 +1,3 @@
-// To do
-// 1. refactor with getDateSrting
-
 export const getShortDateString = date => date?.toISOString()?.slice(0,10);
 
 export const addZeroToStart = str => !str ? undefined : +str > 9 ? str : '0'+(+str);
