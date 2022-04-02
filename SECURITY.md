@@ -4,8 +4,8 @@
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 0.4.x   | :white_check_mark: |
+| 1.0.x   | :white_check_mark: |
 
 ## Reporting a Vulnerability
 
-Please report any bugs and vulnerabilities you detected in the 'Issues' section of this repository
+Please report any detected bugs and vulnerabilities into the 'Issues' section of this repository
