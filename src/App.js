@@ -28,7 +28,8 @@ const App = () => {
             //theme={THEME}
             clearDatesBtn
             blockedDates={BLOCKED_DATES}
-            weekendsBlocked
+            //weekendsBlocked
+            weekendsStyled
             //vertical
             />
         </>

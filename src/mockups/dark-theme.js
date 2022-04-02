@@ -17,6 +17,8 @@ export const DARK_THEME = {
     hiddenBg: BGC,
     blockedColor: ACCENT_COLOR,
     blockedBg: BGC,
+    weekendColor: ACCENT_COLOR,
+    weekendBg: BGC,
     danger: ACCENT_COLOR,
     fontFamily: '"Helvetica", sans-serif',
     fz: '16px',

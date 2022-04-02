@@ -6,7 +6,7 @@ import { BlockedContext } from "../context/blockedContext";
 
 const Month = props => {
 
-    const { month, year, startDate, endDate, weekendsBlocked } = props;
+    const { month, year, startDate, endDate, weekendsBlocked, weekendsStyled } = props;
     const locale = useContext(LocaleContext);
     const blockedDates = useContext(BlockedContext);
 
@@ -34,6 +34,9 @@ const Month = props => {
         }
         else if (currentDate > startDate && currentDate < endDate) {
             classes += ' between'
+        }
+        else if (weekendsStyled && isWeekend(currentDate)) {
+            classes += ' weekend'
         }
         return classes;
     }

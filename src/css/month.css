@@ -41,6 +41,11 @@ thead.table__header tr {
     background-color: var(--bgc);
     cursor: default;
 }
+
+.weekend {
+    color: var(--blockedColor);
+    background-color: var(--bgc);
+}
 .selected {
     background-color: var(--selectedBg);
     color: var(--selectedColor);

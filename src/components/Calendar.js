@@ -19,7 +19,8 @@ const Calendar = props => {
         clearDatesBtn=true,
         vertical=false,
         blockedDates=[],
-        weekendsBlocked=false 
+        weekendsBlocked=false,
+        weekendsStyled=false 
     } = props;
     
     const initialDate = startDate ? startDate : new Date();
@@ -94,6 +95,7 @@ const Calendar = props => {
                                                                         startDate={getShortDateString(startDate)}
                                                                         endDate={getShortDateString(endDate)}
                                                                         weekendsBlocked={weekendsBlocked}
+                                                                        weekendsStyled={weekendsStyled}
                                                                         />)
                         }
                         
