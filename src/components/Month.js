@@ -2,11 +2,13 @@ import { getDaysArray,  getMonthMatrix, getMonthByLocale, getWeekdaysByLocale, g
 import '../css/month.css';
 import React, { useContext } from "react";
 import { LocaleContext } from "../context/localeContext";
+import { BlockedContext } from "../context/blockedContext";
 
 const Month = props => {
 
     const { month, year, startDate, endDate } = props;
     const locale = useContext(LocaleContext);
+    const blockedDates = useContext(BlockedContext);
 
     const daysArray = getDaysArray(month, year);
 
@@ -21,7 +23,10 @@ const Month = props => {
 
         if (week.indexOf(1) > j && monthMatrix.indexOf(week) === 0 ||
         day < 7 && monthMatrix.indexOf(week) === monthMatrix.length-1) {
-           classes += ' disabled' 
+           classes += ' hidden' 
+        }
+        else if (blockedDates.includes(currentDate)) {
+            classes += ' blocked' 
         }
         else if (startDate === currentDate || endDate === currentDate) {
             classes += ' selected';
@@ -54,7 +59,8 @@ const Month = props => {
                                     week.map((day, j) => <td className={getTableCellClass(week, day, j)} 
                                                             id={getDateString(year, month, day)} 
                                                             key={month+day+year}
-                                                            onClick={getTableCellClass(week, day, j).indexOf('disabled') > 0 ? 
+                                                            onClick={(getTableCellClass(week, day, j).indexOf('hidden') > 0 ||
+                                                                getTableCellClass(week, day, j).indexOf('blocked') > 0) ? 
                                                                     () => {} : props.handleDaySelect}
                                                             >
                                                                 {day}

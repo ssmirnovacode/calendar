@@ -28,13 +28,18 @@ thead.table__header tr {
     text-align: center;
     margin-bottom: 1rem;
 }
-.disabled {
-    color: var(--disabledColor);
+.hidden {
+    color: var(--hiddenColor);
     cursor: default;
 }
-.disabled:hover {
+.hidden:hover {
     cursor: default;
-    background-color: var(--disabledBg);
+    background-color: var(--hiddenBg);
+}
+.blocked, .blocked:hover {
+    color: var(--blockedColor);
+    background-color: var(--bgc);
+    cursor: default;
 }
 .selected {
     background-color: var(--selectedBg);

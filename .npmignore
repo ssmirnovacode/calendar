@@ -3,6 +3,8 @@
 
 /public
 /src
+/.github
+/mockups
 
 dist/tests
 dist/App.js 

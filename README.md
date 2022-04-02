@@ -86,8 +86,10 @@ Default style variables can be modified by passing an theme object with specific
         selectedBg: ACCENT,
         betweenColor: FONT_COLOR,
         betweenBg: BGC_OTHER, 
-        disabledColor: BGC,
-        disabledBg: BGC,
+        hiddenColor: BGC_OTHER, // can be styled same as blocked and be visible 
+        hiddenBg: BGC,
+        blockedColor: ACCENT,
+        blockedBg: BGC,
         danger: ACCENT,
         fontFamily: '"Helvetica", sans-serif',
         fz: '16px',

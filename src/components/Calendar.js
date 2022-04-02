@@ -2,6 +2,7 @@ import { getMonthsToRender, getNextMonthYear, getPrevMonthYear, getShortDateStri
 import Month from "./Month";
 import '../css/calendar.css';
 import { LocaleContext } from "../context/localeContext";
+import { BlockedContext } from "../context/blockedContext";
 import React, { useEffect, useMemo, useState } from "react";
 import { initTheme } from "../utils/theme";
 
@@ -16,7 +17,8 @@ const Calendar = props => {
         locale='en-US', 
         theme,
         clearDatesBtn=true,
-        vertical=false 
+        vertical=false,
+        blockedDates=[] 
     } = props;
     
     const initialDate = startDate ? startDate : new Date();
@@ -78,31 +80,33 @@ const Calendar = props => {
 
     return(
         <LocaleContext.Provider value={locale}>
-            <div className="calendar">
-                { renderArrows() }
-                <div className={ vertical? "calendar__body vertical" : "calendar__body"}>
-                    {
-                        monthsToRender.map(({ month, year }) => <Month 
-                                                                    key={month.toString()+year.toString()+Date.now()} 
-                                                                    month={month} 
-                                                                    year={year} 
-                                                                    handleDaySelect={handleDaySelect}
-                                                                    startDate={getShortDateString(startDate)}
-                                                                    endDate={getShortDateString(endDate)}
-                                                                    />)
-                    }
-                    
-                </div>
-                <div className="calendar__footer">
-                    { clearDatesBtn &&
-                        <button className="calendar__footer--btn" 
-                            onClick={() => setDates({ startDate: undefined, endDate: undefined})}
-                        >
-                            <span>&times;</span> Clear dates
-                        </button>
-                    }
+            <BlockedContext.Provider value={blockedDates}>
+                <div className="calendar">
+                    { renderArrows() }
+                    <div className={ vertical? "calendar__body vertical" : "calendar__body"}>
+                        {
+                            monthsToRender.map(({ month, year }) => <Month 
+                                                                        key={month.toString()+year.toString()+Date.now()} 
+                                                                        month={month} 
+                                                                        year={year} 
+                                                                        handleDaySelect={handleDaySelect}
+                                                                        startDate={getShortDateString(startDate)}
+                                                                        endDate={getShortDateString(endDate)}
+                                                                        />)
+                        }
+                        
                     </div>
-            </div>
+                    <div className="calendar__footer">
+                        { clearDatesBtn &&
+                            <button className="calendar__footer--btn" 
+                                onClick={() => setDates({ startDate: undefined, endDate: undefined})}
+                            >
+                                <span>&times;</span> Clear dates
+                            </button>
+                        }
+                        </div>
+                </div>
+            </BlockedContext.Provider>
         </LocaleContext.Provider>
     )
 }
