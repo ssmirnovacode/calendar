@@ -3,10 +3,11 @@
 Light-weight simple Calendar React.js component.
 
 - date formatting based on **locale**;
+- customizable and responsive layout and styles;
 - number of months to be displayed can be easily changed;
-- customizable styles;
+- customized **captions** each date (e.g. prices, notes etc)
 
-![Calendar darkmode example](https://i.ibb.co/VBp6ccg/calendar4.png)
+![Calendar darkmode example](https://i.ibb.co/ph2Bwwx/calendar-captions.png)
 
 ![Calendar view example](https://i.ibb.co/WBMg6GB/calendar1.png)
 
@@ -31,19 +32,27 @@ const App = () => {
     const THEME = {
         color: '#0f1721',
         bgc: 'white'
+    };
+
+    const CAPTIONS_WITH_PRICES = {
+        '2022-04-04': '123 USD',
+        '2022-04-06': '125 USD',
+        '2022-04-07': '121 USD',
     }
 
     return(
         <>
         <Calendar 
             numberOfMonths={2} 
-            arrows={true} 
+            arrows
             startDate={selectedDates.startDate} 
             endDate={selectedDates.endDate} 
             onChange={setSelectedDates} 
             locale={'es-ES'}
             theme={THEME}
             clearDatesBtn
+            weekendsStyled
+            captions={CAPTIONS_WITH_PRICES}
             />
         </>
     )
@@ -56,6 +65,7 @@ const App = () => {
 Following properties can be passed to Calendar component:
 - `arrows` boolean indicating if to render previous/next arrow buttons (false by default);
 - `blockedDates`* array of strings: dates to be blocked, in 'YYYY-MM-DD' format;
+- `captions` - object with date strings in 'YYYY-MM-DD' format as keys and caption text for each date as values;
 - `clearDatesBtn` boolean indicating if to render 'Clear dates' button or numberOfMonths;
 - `locale` locale string ('en-US' by default);
 - `numberOfMonths` number of months to be rendered (2 by default);
@@ -80,27 +90,29 @@ Default style variables can be modified by passing an theme object with specific
 
     // configuration object to be passed as 'theme' prop
     const DARK_THEME = {
-        color: FONT_COLOR, 
-        bgc: BGC, 
-        borderColor: BGC,
-        hoverColor: BGC,
-        hoverBg: FONT_COLOR,
-        selectedColor: BGC, 
-        selectedBg: ACCENT,
         betweenColor: FONT_COLOR,
         betweenBg: BGC_OTHER, 
-        hiddenColor: BGC_OTHER, // can be styled same as blocked and be visible 
-        hiddenBg: BGC,
+        bgc: BGC, 
         blockedColor: ACCENT,
         blockedBg: BGC,
-        weekendColor: ACCENT,
-        weekendBg: BGC,
+        borderColor: BGC,
+        captionFz: '12px', // captions font-size
+        cellSize: '30px',
+        color: FONT_COLOR, 
         danger: ACCENT,
         fontFamily: '"Helvetica", sans-serif',
-        fz: '16px',
-        maxWidth: '800px',
+        fz: '16px', // basic font-size
+        gap: '2rem', // flex gap between months
+        hiddenColor: BGC_OTHER, // can be styled same as blocked and be visible 
+        hiddenBg: BGC,
+        hoverColor: BGC,
+        hoverBg: FONT_COLOR,
+        maxWidth: '800px', // max calendar block width
         padding: '2rem',
-        gap: '2rem'
+        selectedColor: BGC, 
+        selectedBg: ACCENT,
+        weekendColor: ACCENT,
+        weekendBg: BGC
     }
 
 ```

@@ -3,6 +3,7 @@ import Month from "./Month";
 import '../css/calendar.css';
 import { LocaleContext } from "../context/localeContext";
 import { BlockedContext } from "../context/blockedContext";
+import { CaptionsContext } from "../context/captionsContext";
 import React, { useEffect, useMemo, useState } from "react";
 import { initTheme } from "../utils/theme";
 
@@ -20,7 +21,8 @@ const Calendar = props => {
         vertical=false,
         blockedDates=[],
         weekendsBlocked=false,
-        weekendsStyled=false 
+        weekendsStyled=false,
+        captions 
     } = props;
     
     const initialDate = startDate ? startDate : new Date();
@@ -83,6 +85,7 @@ const Calendar = props => {
     return(
         <LocaleContext.Provider value={locale}>
             <BlockedContext.Provider value={blockedDates}>
+                <CaptionsContext.Provider value={captions}>
                 <div className="calendar">
                     { renderArrows() }
                     <div className={ vertical? "calendar__body vertical" : "calendar__body"}>
@@ -110,6 +113,7 @@ const Calendar = props => {
                         }
                         </div>
                 </div>
+                </CaptionsContext.Provider>
             </BlockedContext.Provider>
         </LocaleContext.Provider>
     )

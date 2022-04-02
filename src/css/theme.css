@@ -33,4 +33,7 @@
     --maxWidth: 800px;
     --padding: 2rem;
     --gap: 2rem;
+
+    --cellSize: 30px;
+    --captionFz: 12px;
 }

@@ -11,13 +11,27 @@ thead.table__header tr {
     border: 1px solid var(--borderColor);
     margin: 0;
     padding: 5px;
-    width: 30px;
-    height: 30px;
+    width: var(--cellSize);
+    height: var(--cellSize);
 }
+/* .table__td.with_captions {
+    position: relative;
+}
+.table__td.with_captions .day {
+    position: absolute;
+    top: 0;
+    left:40%;
+    margin-bottom: .5rem;
+} */
 .table__td:hover {
     background-color: var(--hoverBg);
     color: var(--hoverColor);
     cursor: pointer;
+}
+.caption {
+    font-size: var(--captionFz);
+    min-height: var(--captionFz);
+    min-width: var(--captionFz);
 }
 .month {
     display: block;

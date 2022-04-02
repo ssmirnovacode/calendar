@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Calendar from "./components/Calendar";
 import { DARK_THEME as THEME } from "./mockups/dark-theme";
+import { CAPTIONS } from "./mockups/captions";
 
 const App = () => {
 
@@ -25,12 +26,13 @@ const App = () => {
             endDate={selectedDates.endDate} 
             onChange={setSelectedDates} 
             locale={LOCALE}
-            //theme={THEME}
+            theme={THEME}
             clearDatesBtn
             blockedDates={BLOCKED_DATES}
             //weekendsBlocked
             weekendsStyled
             //vertical
+            captions={CAPTIONS}
             />
         </>
     )

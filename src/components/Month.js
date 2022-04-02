@@ -3,12 +3,14 @@ import '../css/month.css';
 import React, { useContext } from "react";
 import { LocaleContext } from "../context/localeContext";
 import { BlockedContext } from "../context/blockedContext";
+import { CaptionsContext } from "../context/captionsContext";
 
 const Month = props => {
 
     const { month, year, startDate, endDate, weekendsBlocked, weekendsStyled } = props;
     const locale = useContext(LocaleContext);
     const blockedDates = useContext(BlockedContext);
+    const captions = useContext(CaptionsContext);
 
     const daysArray = getDaysArray(month, year);
 
@@ -17,7 +19,7 @@ const Month = props => {
     const weekdays = getWeekdaysByLocale(monthMatrix[1], month, year, locale)
 
     const getTableCellClass = (week, day, j) => {
-        let classes = 'table__td';
+        let classes = captions ? 'table__td with_captions': 'table__td';
 
         const currentDate = getDateString(year, month, day);
 
@@ -41,6 +43,10 @@ const Month = props => {
         return classes;
     }
 
+    const getDayContent = day => captions && captions[getDateString(year, month, day)] ? 
+        <>{day} <div className="caption">{captions[getDateString(year, month, day)]}</div></> :
+        captions && !captions[getDateString(year, month, day)] ? 
+         <>{day} <div className="caption"></div></> : day;
 
     return(
         <div className="month">
@@ -67,7 +73,7 @@ const Month = props => {
                                                                 getTableCellClass(week, day, j).indexOf('blocked') > 0) ? 
                                                                     () => {} : props.handleDaySelect}
                                                             >
-                                                                {day}
+                                                                {getDayContent(day)}
                                                             </td>)
                                 }
                             </tr>
