@@ -73,7 +73,7 @@ const Month = props => {
                                                                 getTableCellClass(week, day, j).indexOf('blocked') > 0) ? 
                                                                     () => {} : props.handleDaySelect}
                                                             >
-                                                                {getDayContent(day)}
+                                                                {getTableCellClass(week, day, j).indexOf('hidden') > 0 ? '' : getDayContent(day)}
                                                             </td>)
                                 }
                             </tr>

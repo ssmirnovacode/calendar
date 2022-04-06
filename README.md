@@ -103,8 +103,6 @@ Default style variables can be modified by passing an theme object with specific
         fontFamily: '"Helvetica", sans-serif',
         fz: '16px', // basic font-size
         gap: '2rem', // flex gap between months
-        hiddenColor: BGC_OTHER, // can be styled same as blocked and be visible 
-        hiddenBg: BGC,
         hoverColor: BGC,
         hoverBg: FONT_COLOR,
         maxWidth: '800px', // max calendar block width

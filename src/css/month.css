@@ -43,12 +43,11 @@ thead.table__header tr {
     margin-bottom: 1rem;
 }
 .hidden {
-    color: var(--hiddenColor);
     cursor: default;
 }
 .hidden:hover {
     cursor: default;
-    background-color: var(--hiddenBg);
+    background-color: var(--bgc);
 }
 .blocked, .blocked:hover {
     color: var(--blockedColor);
