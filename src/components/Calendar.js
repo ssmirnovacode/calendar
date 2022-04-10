@@ -22,7 +22,8 @@ const Calendar = props => {
         blockedDates=[],
         weekendsBlocked=false,
         weekendsStyled=false,
-        captions 
+        captions,
+        singleDate=false 
     } = props;
     
     const initialDate = startDate ? startDate : new Date();
@@ -42,6 +43,10 @@ const Calendar = props => {
         const day = new Date(e.target.id);
         if (!day || isNaN(day.getTime())) return;
         // if same day is chosen
+        if (singleDate) {
+            setDates({ startDate: day, endDate: null });
+            return
+        }
         else if ( day - startDate === 0 || day - endDate === 0) {
             return
         }
@@ -95,8 +100,8 @@ const Calendar = props => {
                                                                         month={month} 
                                                                         year={year} 
                                                                         handleDaySelect={handleDaySelect}
-                                                                        startDate={getShortDateString(startDate)}
-                                                                        endDate={getShortDateString(endDate)}
+                                                                        startDate={startDate && getShortDateString(startDate)}
+                                                                        endDate={endDate && getShortDateString(endDate)}
                                                                         weekendsBlocked={weekendsBlocked}
                                                                         weekendsStyled={weekendsStyled}
                                                                         />)

@@ -70,6 +70,7 @@ Following properties can be passed to Calendar component:
 - `locale` locale string ('en-US' by default);
 - `numberOfMonths` number of months to be rendered (2 by default);
 - `onChange` a function to be ejecuted when dates are selected;
+- `singleDate` boolean: if true only one date can be selected (false by default, endDate prop is not needed in this case)
 - `startDate` and `endDate` javascript Date Objects;
 - `theme` an object with specific keys defining the theme for the component to override default styles
 - `vertical` boolean enabling vertical layout without arrows (false by default). Enabled for XS and S screens automatically as part of responsive design;

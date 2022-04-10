@@ -6,7 +6,7 @@ import { CAPTIONS } from "./mockups/captions";
 const App = () => {
 
     const [ selectedDates, setSelectedDates ] = useState({
-        // startDate: new Date(2022, 2, 21),
+        startDate: new Date(2022, 2, 21),
         // endDate: new Date()
     });
 
@@ -16,13 +16,14 @@ const App = () => {
 
     return(
         <>
-        <div>Start: {selectedDates.startDate?.toISOString()} </div>
-        <div>End: {selectedDates.endDate?.toISOString()} </div>
+        {/* <div>Start: {selectedDates.startDate?.toISOString()} </div>
+        <div>End: {selectedDates.endDate?.toISOString()} </div> */}
 
         <Calendar 
-            numberOfMonths={4} 
+            numberOfMonths={2} 
             arrows={true} 
             startDate={selectedDates.startDate} 
+            singleDate
             endDate={selectedDates.endDate} 
             onChange={setSelectedDates} 
             locale={LOCALE}
