@@ -5,10 +5,14 @@ import { CAPTIONS } from "./mockups/captions";
 
 const App = () => {
 
-    const [ selectedDates, setSelectedDates ] = useState({
-        startDate: new Date(2022, 2, 21),
-        // endDate: new Date()
-    });
+    // const [ selectedDates, setSelectedDates ] = useState({
+    //     startDate: new Date(2022, 2, 21),
+    //     // endDate: new Date()
+    // });
+
+    const [ date, setDate ] = useState(new Date());
+
+
 
     const LOCALE = 'es-ES';
 
@@ -19,13 +23,17 @@ const App = () => {
         {/* <div>Start: {selectedDates.startDate?.toISOString()} </div>
         <div>End: {selectedDates.endDate?.toISOString()} </div> */}
 
+        <div>{date?.toDateString()}</div>
+
         <Calendar 
             numberOfMonths={2} 
             arrows={true} 
-            startDate={selectedDates.startDate} 
+            startDate={date} 
+            // startDate={selectedDates.startDate} 
             singleDate
-            endDate={selectedDates.endDate} 
-            onChange={setSelectedDates} 
+            // endDate={selectedDates.endDate} 
+            onChange={setDate} 
+            //onChange={setSelectedDates}
             locale={LOCALE}
             theme={THEME}
             clearDatesBtn

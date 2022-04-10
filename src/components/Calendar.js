@@ -44,7 +44,7 @@ const Calendar = props => {
         if (!day || isNaN(day.getTime())) return;
         // if same day is chosen
         if (singleDate) {
-            setDates({ startDate: day, endDate: null });
+            setDates(day);
             return
         }
         else if ( day - startDate === 0 || day - endDate === 0) {

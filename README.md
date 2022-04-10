@@ -19,6 +19,12 @@ npm install @ssmirnovacode/calendar
 
 ## Usage
 
+Calendar can be configured with two possible options:
+- 2 dates as a range (suitable for purposes like hotel booking, car renting etc);
+- single date (ideal for appointment management and all other cases when only 1 date should be selected):
+
+### Range of 2 dates option: 
+
 ```js
 import { Calendar } from '@ssmirnovacode/calendar';
 
@@ -53,6 +59,36 @@ const App = () => {
             clearDatesBtn
             weekendsStyled
             captions={CAPTIONS_WITH_PRICES}
+            />
+        </>
+    )
+};
+```
+
+### Single date option:
+
+```js
+import { Calendar } from '@ssmirnovacode/calendar';
+
+const App = () => {
+
+    const [ date, setDate ] = useState(new Date());
+
+    const THEME = {
+        color: '#0f1721',
+        bgc: 'white'
+    };
+
+    return(
+        <>
+        <Calendar 
+            numberOfMonths={2} 
+            arrows
+            singleDate
+            startDate={date} 
+            onChange={setDate} 
+            theme={THEME}
+            weekendsStyled
             />
         </>
     )
