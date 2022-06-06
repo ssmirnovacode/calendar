@@ -16,9 +16,9 @@ const App = () => {
 
     const LOCALE = 'es-ES';
 
-    // const BLOCKED_DATES = [ '2022-04-14', '2022-04-15',' 2022-04-16', '2022-04-17', '2022-05-01', '2022-05-02']
+    const BLOCKED_DATES = [ '2022-04-14', '2022-04-15',' 2022-04-16', '2022-04-17', '2022-05-01', '2022-05-02']
 
-    const AVAILABLE_DAYS = ['2022-06-14', '2022-06-15','2022-06-16', '2022-06-17', '2022-07-01', '2022-07-02' ]
+    const AVAILABLE_DAYS = ['2022-06-14', '2022-06-15',' 2022-06-16', '2022-06-17', '2022-07-01', '2022-07-02' ]
 
     return(
         <>
@@ -39,7 +39,7 @@ const App = () => {
             locale={LOCALE}
             theme={THEME}
             clearDatesBtn
-            // blockedDates={BLOCKED_DATES}
+            blockedDates={BLOCKED_DATES}
             availableDates={AVAILABLE_DAYS}
             weekendsBlocked
             // weekendsStyled

@@ -27,7 +27,7 @@ const Month = props => {
         (day < 7 && monthMatrix.indexOf(week) === monthMatrix.length-1)) {
            classes += ' hidden' 
         }
-        else if ((blockedDates && blockedDates.includes(currentDate)) ||
+        else if ((!availableDates && blockedDates && blockedDates.includes(currentDate)) ||
         (weekendsBlocked && isWeekend(currentDate)) || 
         (!blockedDates && availableDates && !availableDates.includes(currentDate))) {
             classes += ' blocked' 

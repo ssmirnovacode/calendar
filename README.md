@@ -100,7 +100,8 @@ const App = () => {
 
 Following properties can be passed to Calendar component:
 - `arrows` boolean indicating if to render previous/next arrow buttons (false by default);
-- `blockedDates`* array of strings: dates to be blocked, in 'YYYY-MM-DD' format;
+- `blockedDates`* array of strings: dates to be blocked, in 'YYYY-MM-DD' format (should only be used with availableDates undefined, otherwise all dates will be treated as available);
+- `availableDates`* array of strings: dates to be available, in 'YYYY-MM-DD' format (should only be used with blockedDates undefined, otherwise all dates will be treated as available);
 - `captions` - object with date strings in 'YYYY-MM-DD' format as keys and caption text for each date as values;
 - `clearDatesBtn` boolean indicating if to render 'Clear dates' button or numberOfMonths;
 - `locale` locale string ('en-US' by default);

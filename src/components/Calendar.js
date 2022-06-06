@@ -6,6 +6,7 @@ import { BlockedContext } from "../context/blockedContext";
 import { CaptionsContext } from "../context/captionsContext";
 import React, { useEffect, useMemo, useState } from "react";
 import { initTheme } from "../utils/theme";
+import { WARNING_BOTH_AVAIL_BLOCKED_DEFINED } from "../utils/constants";
 
 const Calendar = props => {
 
@@ -26,8 +27,6 @@ const Calendar = props => {
         captions,
         singleDate=false 
     } = props;
-
-    console.log(availableDates)
     
     const initialDate = startDate ? startDate : new Date();
     const [ year, month, day ] = initialDate.toISOString().split('T')[0].split('-');
@@ -39,7 +38,8 @@ const Calendar = props => {
     const [ monthsToRender, setMonthsToRender ] = useState(initialMonthsToRender);
 
     useEffect(() => {
-        theme && initTheme(theme)
+        theme && initTheme(theme);
+        blockedDates && availableDates && console.warn(WARNING_BOTH_AVAIL_BLOCKED_DEFINED)
     }, [])
 
     const handleDaySelect = (e) => {
@@ -92,7 +92,7 @@ const Calendar = props => {
 
     return(
         <LocaleContext.Provider value={locale}>
-            <BlockedContext.Provider value={blockedDates}>
+            <BlockedContext.Provider value={ availableDates ? undefined : blockedDates}>
                 <CaptionsContext.Provider value={captions}>
                 <div className="calendar">
                     { renderArrows() }
@@ -102,7 +102,7 @@ const Calendar = props => {
                                                                         key={month.toString()+year.toString()+Date.now()} 
                                                                         month={month} 
                                                                         year={year} 
-                                                                        availableDates={availableDates}
+                                                                        availableDates={blockedDates ? undefined : availableDates}
                                                                         handleDaySelect={handleDaySelect}
                                                                         startDate={startDate && getShortDateString(startDate)}
                                                                         endDate={endDate && getShortDateString(endDate)}
