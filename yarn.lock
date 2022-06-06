@@ -1484,7 +1484,7 @@
   resolved "https://registry.yarnpkg.com/@surma/rollup-plugin-off-main-thread/-/rollup-plugin-off-main-thread-2.2.3.tgz#ee34985952ca21558ab0d952f00298ad2190c053"
   integrity sha512-lR8q/9W7hZpMWweNiAKU7NQerBnzQQLvi8qnTDU/fxItPhtZVMbPV3lbCwjhIlNBe9Bbr5V+KHshvWmVSG9cxQ==
   dependencies:
-    ejs "^3.1.6"
+    ejs "^3.1.7"
     json5 "^2.2.0"
     magic-string "^0.25.0"
     string.prototype.matchall "^4.0.6"
@@ -2434,7 +2434,7 @@ async@0.9.x:
   integrity sha1-rqdNXmHB+JlhO/ZL2mbUx48v0X0=
 
 async@^2.6.2:
-  version "2.6.3"
+  version "2.6.4"
   resolved "https://registry.yarnpkg.com/async/-/async-2.6.3.tgz#d72625e2344a3656e3a3ad4fa749fa83299d82ff"
   integrity sha512-zflvls11DCy+dQWzTW2dzuilv8Z5X/pjfmZOWba6TNIVDm+2UDaJmXSOXlasHKfNBs8oo3M0aT50fDEWfKZjXg==
   dependencies:
