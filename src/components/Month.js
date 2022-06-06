@@ -7,7 +7,7 @@ import { CaptionsContext } from "../context/captionsContext";
 
 const Month = props => {
 
-    const { month, year, startDate, endDate, weekendsBlocked, weekendsStyled } = props;
+    const { month, year, startDate, endDate, weekendsBlocked, weekendsStyled, availableDates } = props;
     const locale = useContext(LocaleContext);
     const blockedDates = useContext(BlockedContext);
     const captions = useContext(CaptionsContext);
@@ -27,8 +27,9 @@ const Month = props => {
         (day < 7 && monthMatrix.indexOf(week) === monthMatrix.length-1)) {
            classes += ' hidden' 
         }
-        else if (blockedDates.includes(currentDate) ||
-        (weekendsBlocked && isWeekend(currentDate))) {
+        else if ((blockedDates && blockedDates.includes(currentDate)) ||
+        (weekendsBlocked && isWeekend(currentDate)) || 
+        (!blockedDates && availableDates && !availableDates.includes(currentDate))) {
             classes += ' blocked' 
         }
         else if (startDate === currentDate || endDate === currentDate) {

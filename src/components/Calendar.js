@@ -19,12 +19,15 @@ const Calendar = props => {
         theme,
         clearDatesBtn=true,
         vertical=false,
-        blockedDates=[],
+        blockedDates, // to keep undefined as default
+        availableDates,
         weekendsBlocked=false,
         weekendsStyled=false,
         captions,
         singleDate=false 
     } = props;
+
+    console.log(availableDates)
     
     const initialDate = startDate ? startDate : new Date();
     const [ year, month, day ] = initialDate.toISOString().split('T')[0].split('-');
@@ -99,6 +102,7 @@ const Calendar = props => {
                                                                         key={month.toString()+year.toString()+Date.now()} 
                                                                         month={month} 
                                                                         year={year} 
+                                                                        availableDates={availableDates}
                                                                         handleDaySelect={handleDaySelect}
                                                                         startDate={startDate && getShortDateString(startDate)}
                                                                         endDate={endDate && getShortDateString(endDate)}
