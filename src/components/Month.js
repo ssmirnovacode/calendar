@@ -1,4 +1,4 @@
-import { getDaysArray,  getMonthMatrix, getMonthByLocale, getWeekdaysByLocale, getDateString, isWeekend } from "../utils/helpers";
+import { getDaysArray,  getMonthMatrix, getMonthByLocale, getWeekdaysByLocale, getDateString, isWeekend, isPast } from "../utils/helpers";
 import '../css/month.css';
 import React, { useContext } from "react";
 import { LocaleContext } from "../context/localeContext";
@@ -7,7 +7,7 @@ import { CaptionsContext } from "../context/captionsContext";
 
 const Month = props => {
 
-    const { month, year, startDate, endDate, weekendsBlocked, weekendsStyled, availableDates } = props;
+    const { month, year, startDate, endDate, weekendsBlocked, weekendsStyled, availableDates, disablePast } = props;
     const locale = useContext(LocaleContext);
     const blockedDates = useContext(BlockedContext);
     const captions = useContext(CaptionsContext);
@@ -21,24 +21,27 @@ const Month = props => {
     const getTableCellClass = (week, day, j) => {
         let classes = captions ? 'table__td with_captions': 'table__td';
 
-        const currentDate = getDateString(year, month, day);
+        const currentDateString = getDateString(year, month, day);
 
+        if (disablePast && isPast(currentDateString)) {
+            classes += ' blocked' 
+        }
         if ((week.indexOf(1) > j && monthMatrix.indexOf(week) === 0) ||
         (day < 7 && monthMatrix.indexOf(week) === monthMatrix.length-1)) {
            classes += ' hidden' 
         }
-        else if ((!availableDates && blockedDates && blockedDates.includes(currentDate)) ||
-        (weekendsBlocked && isWeekend(currentDate)) || 
-        (!blockedDates && availableDates && !availableDates.includes(currentDate))) {
+        else if ((!availableDates && blockedDates && blockedDates.includes(currentDateString)) ||
+        (weekendsBlocked && isWeekend(currentDateString)) || 
+        (!blockedDates && availableDates && !availableDates.includes(currentDateString))) {
             classes += ' blocked' 
         }
-        else if (startDate === currentDate || endDate === currentDate) {
+        else if (startDate === currentDateString || endDate === currentDateString) {
             classes += ' selected';
         }
-        else if (currentDate > startDate && currentDate < endDate) {
+        else if (currentDateString > startDate && currentDateString < endDate) {
             classes += ' between'
         }
-        else if (weekendsStyled && isWeekend(currentDate)) {
+        else if (weekendsStyled && isWeekend(currentDateString)) {
             classes += ' weekend'
         }
         return classes;

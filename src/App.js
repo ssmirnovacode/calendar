@@ -42,6 +42,7 @@ const App = () => {
             blockedDates={BLOCKED_DATES}
             availableDates={AVAILABLE_DAYS}
             weekendsBlocked
+            disablePast={true}
             // weekendsStyled
             //vertical
             captions={CAPTIONS}

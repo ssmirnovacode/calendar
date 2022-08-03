@@ -25,7 +25,8 @@ const Calendar = props => {
         weekendsBlocked=false,
         weekendsStyled=false,
         captions,
-        singleDate=false 
+        singleDate=false,
+        disablePast=false
     } = props;
     
     const initialDate = startDate ? startDate : new Date();
@@ -83,7 +84,7 @@ const Calendar = props => {
         if (arrows && !vertical) {
             return (
                 <div className="calendar__arrows">
-                    <button className="calendar__arrows--prev" onClick={handlePrevBtnClick}>&#8592;</button>
+                   { (!disablePast || +currentBox.month !== new Date().getMonth()+1 ) && <button className="calendar__arrows--prev" onClick={handlePrevBtnClick}>&#8592;</button>}
                     <button className="calendar__arrows--next" onClick={handleNextBtnClick}>&#8594;</button>
                 </div>
             )
@@ -108,6 +109,7 @@ const Calendar = props => {
                                                                         endDate={endDate && getShortDateString(endDate)}
                                                                         weekendsBlocked={weekendsBlocked}
                                                                         weekendsStyled={weekendsStyled}
+                                                                        disablePast={disablePast}
                                                                         />)
                         }
                         

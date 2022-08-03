@@ -104,6 +104,7 @@ Following properties can be passed to Calendar component:
 - `availableDates`* array of strings: dates to be available, in 'YYYY-MM-DD' format (should only be used with blockedDates undefined, otherwise all dates will be treated as available);
 - `captions` - object with date strings in 'YYYY-MM-DD' format as keys and caption text for each date as values;
 - `clearDatesBtn` boolean indicating if to render 'Clear dates' button or numberOfMonths;
+- `disablePast` boolean: if true shows past dates as blocked (false by default)
 - `locale` locale string ('en-US' by default);
 - `numberOfMonths` number of months to be rendered (2 by default);
 - `onChange` a function to be ejecuted when dates are selected;
