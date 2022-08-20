@@ -53,7 +53,7 @@ const Month = props => {
          <>{day} <div className="caption"></div></> : day;
 
     return(
-        <div className="month" data-testid={`month-${month}`}>
+        <div className="month" title="month" data-testid={`month-${month}`}>
             <div className="month__header">
                  <span>{getMonthByLocale(month, year, locale)}</span> <span>{year}</span> 
             </div>
@@ -71,6 +71,7 @@ const Month = props => {
                             <tr key={week+i}>
                                 {
                                     week.map((day, j) => <td className={getTableCellClass(week, day, j)} 
+                                                            data-testid={`day-${day}.${month}`}
                                                             id={getDateString(year, month, day)} 
                                                             key={month+day+year}
                                                             onClick={(getTableCellClass(week, day, j).indexOf('hidden') > 0 ||

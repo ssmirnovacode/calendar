@@ -116,7 +116,7 @@ const Calendar = props => {
                     </div>
                     <div className="calendar__footer">
                         { clearDatesBtn &&
-                            <button className="calendar__footer--btn" 
+                            <button className="calendar__footer--btn" data-testid="clear-btn"
                                 onClick={() => setDates({ startDate: undefined, endDate: undefined})}
                             >
                                 <span>&times;</span> Clear dates
