@@ -53,7 +53,7 @@ const Month = props => {
          <>{day} <div className="caption"></div></> : day;
 
     return(
-        <div className="month">
+        <div className="month" data-testid={`month-${month}`}>
             <div className="month__header">
                  <span>{getMonthByLocale(month, year, locale)}</span> <span>{year}</span> 
             </div>

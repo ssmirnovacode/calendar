@@ -83,9 +83,9 @@ const Calendar = props => {
     const renderArrows = () => {
         if (arrows && !vertical) {
             return (
-                <div className="calendar__arrows">
-                   { (!disablePast || +currentBox.month !== new Date().getMonth()+1 ) && <button className="calendar__arrows--prev" onClick={handlePrevBtnClick}>&#8592;</button>}
-                    <button className="calendar__arrows--next" onClick={handleNextBtnClick}>&#8594;</button>
+                <div className="calendar__arrows" data-testid="arrows">
+                   { (!disablePast || +currentBox.month !== new Date().getMonth()+1 ) && <button className="calendar__arrows--prev" data-testid="prev" onClick={handlePrevBtnClick}>&#8592;</button>}
+                    <button className="calendar__arrows--next" data-testid="next" onClick={handleNextBtnClick}>&#8594;</button>
                 </div>
             )
         }
@@ -95,7 +95,7 @@ const Calendar = props => {
         <LocaleContext.Provider value={locale}>
             <BlockedContext.Provider value={ availableDates ? undefined : blockedDates}>
                 <CaptionsContext.Provider value={captions}>
-                <div className="calendar">
+                <div className="calendar" data-testid="calendar">
                     { renderArrows() }
                     <div className={ vertical? "calendar__body vertical" : "calendar__body"}>
                         {
