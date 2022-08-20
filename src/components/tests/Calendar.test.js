@@ -2,11 +2,14 @@ import {render, screen} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Calendar from "../Calendar";
 
-const START_DATE = new Date(2022, 8, 21);
-const NEXT_DATE = new Date(2022, 9, 21);
+const START_DATE = new Date(2022, 8, 21); // 20/09/2022
+const NEXT_DATE = new Date(2022, 9, 21); //20/10/2022
 const NEXT_MONTH = 11; // first month that wouldnt apper in 2-months view until the next btn click
 
 describe('Calendar test', () => {
+   
+    const currentMonth = new Date().getMonth()+1;
+    const currentDay = new Date().getDate();
 
     test('default rendering', () => {
         render(<Calendar startDate={START_DATE}/>); // overwise test will fail once month is passed
@@ -47,15 +50,32 @@ describe('Calendar test', () => {
         expect(prevArrow).toBeNull();
         const nextArrow = screen.getByTestId('next');
         expect(nextArrow).toBeInTheDocument();   //toHaveClass
-        const currentMonth = new Date().getMonth()+1;
-        const currentDay = new Date().getDate();
         for (let i=currentDay-1; i > 0; i--) {
             const pastDayCells = screen.getAllByTestId(`day-${currentDay-i}.${currentMonth}`); // empty cells corresponding to next and prev months included
             pastDayCells.forEach(cell => {
                 expect(cell).toHaveClass('blocked')
             })
         }
-        
+    });
+
+    test('blocked weekends', () => {
+        render(<Calendar weekendsBlocked startDate={START_DATE}/>); 
+        const saturday = screen.getByTestId('day-10.9');
+        expect(saturday).toHaveClass('blocked')
+        const sunday = screen.getByTestId('day-11.9');
+        expect(sunday).toHaveClass('blocked')
+    })
+
+    test('with selected dates', () => {
+        render(<Calendar startDate={START_DATE} endDate ={NEXT_DATE} />); 
+        const calendar = screen.getByTestId('calendar');
+        expect(calendar).toMatchSnapshot();
+        const from = screen.getByTestId(`day-${START_DATE.getDate()-1}.${START_DATE.getMonth()+1}`); // -1 coz Date() returns 1 day less
+        const between = screen.getByTestId(`day-${START_DATE.getDate()+5}.${START_DATE.getMonth()+1}`);
+        const to = screen.getByTestId(`day-${NEXT_DATE.getDate()-1}.${NEXT_DATE.getMonth()+1}`);
+        expect(from).toHaveClass('selected')
+        expect(to).toHaveClass('selected')
+        expect(between).toHaveClass('between')
     })
 
     test('render without clear btn', () => {
@@ -96,5 +116,12 @@ describe('Calendar test', () => {
         }`);       
         expect(initialSecondMonth).toBeNull();
     })
+
+    // test('select day', () => {
+    //     render(<Calendar startDate={START_DATE}/>);
+    //     const clickedCell = screen.getByTestId(`day-${START_DATE.getDate()+1}.${START_DATE.getMonth()+1}`); // 22/09/2022
+    //     userEvent.click(clickedCell);
+    //     expect(clickedCell).toHaveClass('selected')
+    // })
 
 })
