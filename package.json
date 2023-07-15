@@ -23,8 +23,15 @@
     "type": "git",
     "url": "git+https://github.com/ssmirnovacode/calendar.git"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@types/jest": "^29.5.3",
+    "@types/node": "^20.4.2",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "typescript": "^5.1.6"
+  },
   "scripts": {
+    "compile": "tsc --watch --noEmit",
     "start": "react-scripts start",
     "build": "del dist && babel src --out-dir dist --copy-files",
     "test": "react-scripts test",
