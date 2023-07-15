@@ -5,7 +5,7 @@ import {
   getShortDateString,
   isSameDay,
 } from "../utils/helpers";
-import Month from "./Month";
+import { Month as MonthComponent } from "./Month";
 import "../css/calendar.css";
 import { LocaleContext } from "../context/localeContext";
 import { BlockedContext } from "../context/blockedContext";
@@ -13,7 +13,7 @@ import { CaptionsContext } from "../context/captionsContext";
 import React, { useEffect, useMemo, useState } from "react";
 import { initTheme } from "../utils/theme";
 import { WARNING_BOTH_AVAIL_BLOCKED_DEFINED } from "../utils/constants";
-import { SelectedDates, Theme } from "../types";
+import { Month, SelectedDates, Theme, Year } from "../types";
 
 type CalendarProps = {
   numberOfMonths?: number;
@@ -55,11 +55,14 @@ const Calendar = (props: CalendarProps) => {
   } = props;
 
   const initialDate: Date = startDate || new Date();
-  const [day, month, year]: string[] = initialDate
+  const [day, month, year]: [string, Month, Year] = initialDate
     .toLocaleDateString("es-ES")
-    .split("/");
+    .split("/") as [string, Month, Year];
 
-  const [currentBox, setCurrentBox] = useState({ month, year });
+  const [currentBox, setCurrentBox] = useState<{ month: Month; year: Year }>({
+    month,
+    year,
+  });
 
   const initialMonthsToRender = useMemo(
     () => getMonthsToRender(month, year, numberOfMonths),
@@ -75,7 +78,7 @@ const Calendar = (props: CalendarProps) => {
       console.warn(WARNING_BOTH_AVAIL_BLOCKED_DEFINED);
   }, []);
 
-  const handleDaySelect = (e) => {
+  const handleDaySelect = (e: { target: { id: string } }) => {
     const day: Date = new Date(e.target.id);
     if (!day || isNaN(day.getTime())) return;
     // if same day is chosen
@@ -104,7 +107,7 @@ const Calendar = (props: CalendarProps) => {
     const { month: prevMonth, year: prevYear } = getPrevMonthYear(
       currentBox.month,
       currentBox.year
-    );
+    ) as { month: Month; year: Year };
     setCurrentBox({ month: prevMonth, year: prevYear });
     setMonthsToRender(getMonthsToRender(prevMonth, prevYear, numberOfMonths));
   };
@@ -113,7 +116,7 @@ const Calendar = (props: CalendarProps) => {
     const { month: nextMonth, year: nextYear } = getNextMonthYear(
       currentBox.month,
       currentBox.year
-    );
+    ) as { month: Month; year: Year };
 
     setCurrentBox({ month: nextMonth, year: nextYear });
     setMonthsToRender(getMonthsToRender(nextMonth, nextYear, numberOfMonths));
@@ -159,7 +162,7 @@ const Calendar = (props: CalendarProps) => {
               }
             >
               {monthsToRender.map(({ month, year }) => (
-                <Month
+                <MonthComponent
                   key={month.toString() + year.toString() + Date.now()}
                   month={month}
                   year={year}
