@@ -5,7 +5,7 @@ import {
   getShortDateString,
   isSameDay,
 } from "../utils/helpers";
-import { Month as MonthComponent } from "./Month";
+import { MonthComponent } from "./Month";
 import "../css/calendar.css";
 import { LocaleContext } from "../context/localeContext";
 import { BlockedContext } from "../context/blockedContext";
@@ -69,7 +69,9 @@ const Calendar = (props: CalendarProps) => {
     [month, year, numberOfMonths]
   );
 
-  const [monthsToRender, setMonthsToRender] = useState(initialMonthsToRender);
+  const [monthsToRender, setMonthsToRender] = useState<
+    { month: Month; year: Year }[]
+  >(initialMonthsToRender);
 
   useEffect(() => {
     theme && initTheme(theme);

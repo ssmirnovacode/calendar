@@ -104,7 +104,7 @@ export const getMonthsToRender = (
 ) => {
   if (!monthsToRender) return [];
 
-  const monthsArr = [{ month: +currentMonth, year: +currentYear }];
+  const monthsArr = [{ month: currentMonth, year: currentYear }];
   let nextMonth = currentMonth;
   let nextYear = currentYear;
   let i = 1;
@@ -113,7 +113,7 @@ export const getMonthsToRender = (
       month: Month;
       year: Year;
     };
-    monthsArr.push({ month: +month, year: +year });
+    monthsArr.push({ month, year });
     nextMonth = month;
     nextYear = year;
     i++;

@@ -12,8 +12,21 @@ import React, { useContext } from "react";
 import { LocaleContext } from "../context/localeContext";
 import { BlockedContext } from "../context/blockedContext";
 import { CaptionsContext } from "../context/captionsContext";
+import { Month, Year } from "../types";
 
-export const Month = (props) => {
+type MonthProps = {
+  month: Month;
+  year: Year;
+  startDate?: string;
+  endDate?: string;
+  handleDaySelect: (e: { target: { id: string } }) => void;
+  weekendsBlocked: boolean;
+  weekendsStyled: boolean;
+  availableDates?: string[];
+  disablePast: boolean;
+};
+
+export const MonthComponent = (props: MonthProps) => {
   const {
     month,
     year,
