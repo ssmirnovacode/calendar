@@ -19,7 +19,7 @@ type MonthProps = {
   year: Year;
   startDate?: string;
   endDate?: string;
-  handleDaySelect: (e: { target: { id: string } }) => void;
+  handleDaySelect: React.MouseEventHandler<HTMLTableDataCellElement>;
   weekendsBlocked: boolean;
   weekendsStyled: boolean;
   availableDates?: string[];
@@ -45,25 +45,25 @@ export const MonthComponent = (props: MonthProps) => {
 
   const monthMatrix = getMonthMatrix(daysArray);
 
-  const weekdays = getWeekdaysByLocale(monthMatrix[1], month, year, locale);
+  const weekdays = getWeekdaysByLocale(monthMatrix[1]!, month, year, locale); // add typing monthMatrix[1] to avoid !
 
-  const getTableCellClass = (week, day, j) => {
+  const getTableCellClass = (week: string[], day: number, j: number) => {
     let classes = captions ? "table__td with_captions" : "table__td";
 
-    const currentDateString = getDateString(year, month, day);
+    const currentDateString = getDateString(+year, +month, day);
 
     if (disablePast && isPast(currentDateString)) {
       classes += " blocked";
     }
     if (
-      (week.indexOf(1) > j && monthMatrix.indexOf(week) === 0) ||
+      (week.indexOf("1") > j && monthMatrix.indexOf(week) === 0) ||
       (day < 7 && monthMatrix.indexOf(week) === monthMatrix.length - 1)
     ) {
       classes += " hidden";
     } else if (
       (!availableDates &&
         blockedDates &&
-        blockedDates.includes(currentDateString)) ||
+        blockedDates?.includes(currentDateString)) ||
       (weekendsBlocked && isWeekend(currentDateString)) ||
       (!blockedDates &&
         availableDates &&
@@ -75,7 +75,12 @@ export const MonthComponent = (props: MonthProps) => {
       endDate === currentDateString
     ) {
       classes += " selected";
-    } else if (currentDateString > startDate && currentDateString < endDate) {
+    } else if (
+      startDate &&
+      endDate &&
+      currentDateString > startDate &&
+      currentDateString < endDate
+    ) {
       classes += " between";
     } else if (weekendsStyled && isWeekend(currentDateString)) {
       classes += " weekend";
@@ -83,21 +88,19 @@ export const MonthComponent = (props: MonthProps) => {
     return classes;
   };
 
-  const getDayContent = (day) =>
-    captions && captions[getDateString(year, month, day)] ? (
+  const getDayContent = (day: number) => {
+    const dateString = getDateString(+year, +month, day);
+    if (!captions) return day;
+    return captions[dateString] ? (
       <>
-        {day}{" "}
-        <div className="caption">
-          {captions[getDateString(year, month, day)]}
-        </div>
+        {day} <div className="caption">{captions[dateString]}</div>
       </>
-    ) : captions && !captions[getDateString(year, month, day)] ? (
+    ) : (
       <>
         {day} <div className="caption"></div>
       </>
-    ) : (
-      day
     );
+  };
 
   return (
     <div className="month" title="month" data-testid={`month-${month}`}>
@@ -116,23 +119,23 @@ export const MonthComponent = (props: MonthProps) => {
         <tbody className="table__body">
           {monthMatrix.map((week, i) => {
             return (
-              <tr key={week + i}>
+              <tr key={week.reduce((a, b) => a + b) + i}>
                 {week.map((day, j) => (
                   <td
-                    className={getTableCellClass(week, day, j)}
+                    className={getTableCellClass(week, +day, j)}
                     data-testid={`day-${day}.${month}`}
-                    id={getDateString(year, month, day)}
+                    id={getDateString(+year, +month, +day)}
                     key={month + day + year}
                     onClick={
-                      getTableCellClass(week, day, j).indexOf("hidden") > 0 ||
-                      getTableCellClass(week, day, j).indexOf("blocked") > 0
+                      getTableCellClass(week, +day, j).indexOf("hidden") > 0 ||
+                      getTableCellClass(week, +day, j).indexOf("blocked") > 0
                         ? () => {}
                         : props.handleDaySelect
                     }
                   >
-                    {getTableCellClass(week, day, j).indexOf("hidden") > 0
+                    {getTableCellClass(week, +day, j).indexOf("hidden") > 0
                       ? ""
-                      : getDayContent(day)}
+                      : getDayContent(+day)}
                   </td>
                 ))}
               </tr>

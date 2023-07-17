@@ -29,7 +29,7 @@ type CalendarProps = {
   availableDates: string[];
   weekendsBlocked?: boolean;
   weekendsStyled?: boolean;
-  captions: object; // TODO - switch to array of objects
+  captions?: { [key: string]: string };
   singleDate?: boolean;
   disablePast?: boolean;
 };
@@ -80,8 +80,9 @@ const Calendar = (props: CalendarProps) => {
       console.warn(WARNING_BOTH_AVAIL_BLOCKED_DEFINED);
   }, []);
 
-  const handleDaySelect = (e: { target: { id: string } }) => {
-    const day: Date = new Date(e.target.id);
+  const handleDaySelect = (e: React.MouseEvent<HTMLElement>) => {
+    const target = e.target as HTMLElement;
+    const day: Date = new Date(target.id);
     if (!day || isNaN(day.getTime())) return;
     // if same day is chosen
     if (singleDate) {

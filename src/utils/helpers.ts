@@ -33,7 +33,7 @@ export const getFullDateByLocale = (dateObj: Date, locale = "en") => {
 };
 //  getting weekday names for tabe header
 export const getWeekdaysByLocale = (
-  week: string,
+  week: string[],
   month: Month,
   year: Year,
   locale = "en"
@@ -68,30 +68,29 @@ export const getDaysArray = (month: Month, year: Year) => {
   ).getDay();
   const daysArray = [];
   for (let d = 1; d <= daysInMonth; d++) {
-    daysArray.push(d);
+    daysArray.push(d.toString());
   }
   if (firstDayWeekday > 1 || firstDayWeekday === 0) {
     const diff = firstDayWeekday === 0 ? 6 : firstDayWeekday - 1;
     for (let d = daysInPrevMonth; d > daysInPrevMonth - diff; d--) {
-      daysArray.unshift(d);
+      daysArray.unshift(d.toString());
     }
   }
   if (lastDayWeekday !== 0) {
     const diff = 7 - lastDayWeekday;
     for (let d = 1; d <= diff; d++) {
-      daysArray.push(d);
+      daysArray.push(d.toString());
     }
   }
   return daysArray;
 };
 
 export const getMonthMatrix = (arr: string[]) => {
-  if (!arr || arr.length < 28 || arr.length % 7 > 0) return [];
   const matrix = [];
 
   for (let i = 0; i < arr.length; i += 7) {
-    const chunk = arr.slice(i, i + 7);
-    matrix.push(chunk);
+    const row = arr.slice(i, i + 7);
+    matrix.push(row);
   }
 
   return matrix;
