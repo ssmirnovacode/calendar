@@ -53,7 +53,7 @@ const Calendar: FC<CalendarProps> = ({
   disablePast = false,
 }) => {
   const initialDate: Date = startDate || new Date();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const [, month, year]: [string, Month, Year] = initialDate
     .toLocaleDateString("es-ES")
     .split("/") as [string, Month, Year];
@@ -81,6 +81,7 @@ const Calendar: FC<CalendarProps> = ({
 
   const handleDaySelect = (e: React.MouseEvent<HTMLElement>) => {
     const target = e.target as HTMLElement;
+    console.log("event", e);
     const day: Date = new Date(target.id);
     if (!day || isNaN(day.getTime())) return;
     // if same day is chosen

@@ -19,7 +19,7 @@ type MonthProps = {
   year: Year;
   startDate?: string;
   endDate?: string;
-  handleDaySelect: React.MouseEventHandler<HTMLTableDataCellElement>;
+  handleDaySelect: (e: React.MouseEvent<HTMLElement>) => void;
   weekendsBlocked: boolean;
   weekendsStyled: boolean;
   availableDates?: string[];
@@ -130,7 +130,7 @@ export const MonthComponent: FC<MonthProps> = ({
                       getTableCellClass(week, +day, j).indexOf("hidden") > 0 ||
                       getTableCellClass(week, +day, j).indexOf("blocked") > 0
                         ? () => {}
-                        : handleDaySelect
+                        : (e) => handleDaySelect(e)
                     }
                   >
                     {getTableCellClass(week, +day, j).indexOf("hidden") > 0
