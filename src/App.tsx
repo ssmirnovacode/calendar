@@ -10,7 +10,7 @@ const App: FC = () => {
     endDate: new Date(),
   });
 
-  const [date, setDate] = useState(new Date());
+  //const [date, setDate] = useState(new Date());
 
   const LOCALE = "es-ES";
 
@@ -37,7 +37,7 @@ const App: FC = () => {
       {/* <div>Start: {selectedDates.startDate?.toISOString()} </div>
         <div>End: {selectedDates.endDate?.toISOString()} </div> */}
 
-      <div>{date?.toDateString()}</div>
+      {/* <div>{date?.toDateString()}</div> */}
 
       <Calendar
         numberOfMonths={2}

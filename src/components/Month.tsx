@@ -8,7 +8,7 @@ import {
   isPast,
 } from "../utils/helpers";
 import "../css/month.css";
-import React, { useContext } from "react";
+import React, { FC, useContext } from "react";
 import { LocaleContext } from "../context/localeContext";
 import { BlockedContext } from "../context/blockedContext";
 import { CaptionsContext } from "../context/captionsContext";
@@ -26,17 +26,17 @@ type MonthProps = {
   disablePast: boolean;
 };
 
-export const MonthComponent = (props: MonthProps) => {
-  const {
-    month,
-    year,
-    startDate,
-    endDate,
-    weekendsBlocked,
-    weekendsStyled,
-    availableDates,
-    disablePast,
-  } = props;
+export const MonthComponent: FC<MonthProps> = ({
+  month,
+  year,
+  startDate,
+  endDate,
+  weekendsBlocked,
+  weekendsStyled,
+  availableDates,
+  disablePast,
+  handleDaySelect,
+}) => {
   const locale = useContext(LocaleContext);
   const blockedDates = useContext(BlockedContext);
   const captions = useContext(CaptionsContext);
@@ -130,7 +130,7 @@ export const MonthComponent = (props: MonthProps) => {
                       getTableCellClass(week, +day, j).indexOf("hidden") > 0 ||
                       getTableCellClass(week, +day, j).indexOf("blocked") > 0
                         ? () => {}
-                        : props.handleDaySelect
+                        : handleDaySelect
                     }
                   >
                     {getTableCellClass(week, +day, j).indexOf("hidden") > 0

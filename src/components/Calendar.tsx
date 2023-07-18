@@ -10,7 +10,7 @@ import "../css/calendar.css";
 import { LocaleContext } from "../context/localeContext";
 import { BlockedContext } from "../context/blockedContext";
 import { CaptionsContext } from "../context/captionsContext";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { FC, useEffect, useMemo, useState } from "react";
 import { initTheme } from "../utils/theme";
 import { WARNING_BOTH_AVAIL_BLOCKED_DEFINED } from "../utils/constants";
 import { Month, SelectedDates, Theme, Year } from "../types";
@@ -25,7 +25,7 @@ type CalendarProps = {
   theme: Theme;
   clearDatesBtn?: boolean;
   vertical?: boolean;
-  blockedDates: string[]; // to keep undefined as default
+  blockedDates?: string[]; // to keep undefined as default
   availableDates: string[];
   weekendsBlocked?: boolean;
   weekendsStyled?: boolean;
@@ -34,28 +34,27 @@ type CalendarProps = {
   disablePast?: boolean;
 };
 
-const Calendar = (props: CalendarProps) => {
-  const {
-    numberOfMonths = 2, // TODO - find out how to manage default props. optional?
-    arrows = false,
-    startDate,
-    endDate,
-    onChange: setDates,
-    locale = "en-US",
-    theme,
-    clearDatesBtn = true,
-    vertical = false,
-    blockedDates, // to keep undefined as default
-    availableDates,
-    weekendsBlocked = false,
-    weekendsStyled = false,
-    captions,
-    singleDate = false,
-    disablePast = false,
-  } = props;
-
+const Calendar: FC<CalendarProps> = ({
+  numberOfMonths = 2, // TODO - find out how to manage default props. optional?
+  arrows = false,
+  startDate,
+  endDate,
+  onChange: setDates,
+  locale = "en-US",
+  theme,
+  clearDatesBtn = true,
+  vertical = false,
+  blockedDates, // to keep undefined as default
+  availableDates,
+  weekendsBlocked = false,
+  weekendsStyled = false,
+  captions,
+  singleDate = false,
+  disablePast = false,
+}) => {
   const initialDate: Date = startDate || new Date();
-  const [day, month, year]: [string, Month, Year] = initialDate
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [, month, year]: [string, Month, Year] = initialDate
     .toLocaleDateString("es-ES")
     .split("/") as [string, Month, Year];
 
@@ -153,9 +152,7 @@ const Calendar = (props: CalendarProps) => {
 
   return (
     <LocaleContext.Provider value={locale}>
-      <BlockedContext.Provider
-        value={availableDates ? undefined : blockedDates}
-      >
+      <BlockedContext.Provider value={blockedDates}>
         <CaptionsContext.Provider value={captions}>
           <div className="calendar" data-testid="calendar">
             {renderArrows()}
