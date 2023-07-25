@@ -16,6 +16,7 @@ import { initTheme } from "../utils/theme";
 import { WARNING_BOTH_AVAIL_BLOCKED_DEFINED } from "../utils/constants";
 import { Month, SelectedDates, Theme, Year } from "../types";
 import { CalendarProps } from "../../calendar";
+import { ArrowButtons, ArrowButtonsProps } from "./parcials/ArrowButtons";
 
 const Calendar: FC<CalendarProps> = ({
   numberOfMonths = 2, // TODO - find out how to manage default props. optional?
@@ -88,49 +89,12 @@ const Calendar: FC<CalendarProps> = ({
     else setDates({ startDate: day, endDate: undefined });
   };
 
-  const handlePrevBtnClick = () => {
-    const { month: prevMonth, year: prevYear } = getPrevMonthYear(
-      currentBox.month,
-      currentBox.year
-    ) as { month: Month; year: Year };
-    setCurrentBox({ month: prevMonth, year: prevYear });
-    setMonthsToRender(getMonthsToRender(prevMonth, prevYear, numberOfMonths));
-  };
-
-  const handleNextBtnClick = () => {
-    const { month: nextMonth, year: nextYear } = getNextMonthYear(
-      currentBox.month,
-      currentBox.year
-    ) as { month: Month; year: Year };
-
-    setCurrentBox({ month: nextMonth, year: nextYear });
-    setMonthsToRender(getMonthsToRender(nextMonth, nextYear, numberOfMonths));
-  };
-
-  const renderArrows = () => {
-    if (arrows && !vertical) {
-      return (
-        <div className="calendar__arrows" data-testid="arrows">
-          {(!disablePast ||
-            +currentBox.month !== new Date().getMonth() + 1) && (
-            <button
-              className="calendar__arrows--prev"
-              data-testid="prev"
-              onClick={handlePrevBtnClick}
-            >
-              &#8592;
-            </button>
-          )}
-          <button
-            className="calendar__arrows--next"
-            data-testid="next"
-            onClick={handleNextBtnClick}
-          >
-            &#8594;
-          </button>
-        </div>
-      );
-    }
+  const arrowBtnsProps: ArrowButtonsProps = {
+    disablePast,
+    currentBox,
+    numberOfMonths,
+    setCurrentBox,
+    setMonthsToRender,
   };
 
   return (
@@ -138,7 +102,7 @@ const Calendar: FC<CalendarProps> = ({
       <BlockedContext.Provider value={blockedDates}>
         <CaptionsContext.Provider value={captions}>
           <div className="calendar" data-testid="calendar">
-            {renderArrows()}
+            {arrows && !vertical ? <ArrowButtons {...arrowBtnsProps} /> : null}
             <div
               className={
                 vertical ? "calendar__body vertical" : "calendar__body"
