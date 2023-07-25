@@ -18,7 +18,7 @@ const App: FC = () => {
   const BLOCKED_DATES = [
     "2023-08-14",
     "2023-08-15",
-    " 2023-08-16",
+    "2023-08-16",
     "2023-09-17",
     "2023-09-01",
     "2023-09-02",
@@ -44,9 +44,9 @@ const App: FC = () => {
         numberOfMonths={2}
         arrows={true}
         //startDate={date}
-        //startDate={selectedDates.startDate}
+        startDate={selectedDates.startDate}
         //singleDate
-        //endDate={selectedDates.endDate}
+        endDate={selectedDates.endDate}
         //onChange={setDate}
         onChange={setSelectedDates}
         locale={LOCALE}

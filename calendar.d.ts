@@ -1,8 +1,8 @@
 export interface CalendarProps {
   numberOfMonths?: number;
   arrows?: boolean;
-  startDate?: Date;
-  endDate?: Date;
+  startDate: Date | undefined; // mandatory but can be undefined
+  endDate: Date | undefined;
   onChange: (dates: SelectedDates) => void; // TODO - check singleDate funcitonality  | ((date: Date) => void
   locale?: string; // TODO: add valid list
   theme: Theme;

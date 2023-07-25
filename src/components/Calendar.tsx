@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   getMonthsToRender,
-  getNextMonthYear,
-  getPrevMonthYear,
   getShortDateString,
   isSameDay,
 } from "../utils/helpers";
@@ -14,28 +12,36 @@ import { CaptionsContext } from "../context/captionsContext";
 import React, { FC, useEffect, useMemo, useState } from "react";
 import { initTheme } from "../utils/theme";
 import { WARNING_BOTH_AVAIL_BLOCKED_DEFINED } from "../utils/constants";
-import { Month, SelectedDates, Theme, Year } from "../types";
+import {
+  Month,
+  SelectedDates,
+  Theme,
+  Year,
+  assertCalendarProps,
+} from "../types";
 import { CalendarProps } from "../../calendar";
 import { ArrowButtons, ArrowButtonsProps } from "./parcials/ArrowButtons";
+import { DARK_THEME } from "../mockups/dark-theme";
 
-const Calendar: FC<CalendarProps> = ({
-  numberOfMonths = 2, // TODO - find out how to manage default props. optional?
-  arrows = false,
-  startDate,
-  endDate,
-  onChange: setDates,
-  locale = "en-US",
-  theme,
-  clearDatesBtn = true,
-  vertical = false,
-  blockedDates, // to keep undefined as default
-  availableDates,
-  weekendsBlocked = false,
-  weekendsStyled = false,
-  captions,
-  singleDate = false,
-  disablePast = false,
-}) => {
+const Calendar: FC<CalendarProps> = (props) => {
+  const {
+    numberOfMonths = 2, // TODO - find out how to manage default props. optional?
+    arrows = false,
+    startDate,
+    endDate,
+    onChange: setDates,
+    locale = "en-US",
+    theme = DARK_THEME,
+    clearDatesBtn = true,
+    vertical = false,
+    blockedDates, // to keep undefined as default
+    availableDates,
+    weekendsBlocked = false,
+    weekendsStyled = false,
+    captions,
+    singleDate = false,
+    disablePast = false,
+  } = props || {};
   const initialDate: Date = startDate || new Date();
 
   const [, month, year]: [string, Month, Year] = initialDate
@@ -57,7 +63,8 @@ const Calendar: FC<CalendarProps> = ({
   >(initialMonthsToRender);
 
   useEffect(() => {
-    theme && initTheme(theme);
+    assertCalendarProps(props);
+    theme && initTheme({ ...theme, ...DARK_THEME }); // TODO create neutral default theme
     blockedDates &&
       availableDates &&
       console.warn(WARNING_BOTH_AVAIL_BLOCKED_DEFINED);
@@ -66,6 +73,7 @@ const Calendar: FC<CalendarProps> = ({
   const handleDaySelect = (e: React.MouseEvent<HTMLElement>) => {
     const target = e.target as HTMLElement;
     const day: Date = new Date(target.id);
+
     if (!day || isNaN(day.getTime())) return;
     // if same day is chosen
     if (singleDate) {
@@ -86,7 +94,11 @@ const Calendar: FC<CalendarProps> = ({
         : setDates({ startDate: endDate, endDate: day });
     }
     // either both defined or both undefined
-    else setDates({ startDate: day, endDate: undefined });
+    else {
+      //debugger;
+      setDates({ startDate: day, endDate: undefined });
+      console.log("change", { startDate: day, endDate: undefined });
+    }
   };
 
   const arrowBtnsProps: ArrowButtonsProps = {
