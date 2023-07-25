@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   getMonthsToRender,
   getNextMonthYear,
@@ -14,25 +15,7 @@ import React, { FC, useEffect, useMemo, useState } from "react";
 import { initTheme } from "../utils/theme";
 import { WARNING_BOTH_AVAIL_BLOCKED_DEFINED } from "../utils/constants";
 import { Month, SelectedDates, Theme, Year } from "../types";
-
-type CalendarProps = {
-  numberOfMonths?: number;
-  arrows?: boolean;
-  startDate?: Date;
-  endDate?: Date;
-  onChange: (dates: SelectedDates) => void; // TODO - check singleDate funcitonality
-  locale?: string; // TODO: add valid list
-  theme: Theme;
-  clearDatesBtn?: boolean;
-  vertical?: boolean;
-  blockedDates?: string[]; // to keep undefined as default
-  availableDates: string[];
-  weekendsBlocked?: boolean;
-  weekendsStyled?: boolean;
-  captions?: { [key: string]: string };
-  singleDate?: boolean;
-  disablePast?: boolean;
-};
+import { CalendarProps } from "../../calendar";
 
 const Calendar: FC<CalendarProps> = ({
   numberOfMonths = 2, // TODO - find out how to manage default props. optional?
@@ -81,7 +64,6 @@ const Calendar: FC<CalendarProps> = ({
 
   const handleDaySelect = (e: React.MouseEvent<HTMLElement>) => {
     const target = e.target as HTMLElement;
-    console.log("event", e);
     const day: Date = new Date(target.id);
     if (!day || isNaN(day.getTime())) return;
     // if same day is chosen

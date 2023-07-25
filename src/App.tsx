@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { FC, useState } from "react";
 import Calendar from "./components/Calendar";
 import { DARK_THEME as THEME } from "./mockups/dark-theme";
@@ -43,16 +44,16 @@ const App: FC = () => {
         numberOfMonths={2}
         arrows={true}
         //startDate={date}
-        startDate={selectedDates.startDate}
+        //startDate={selectedDates.startDate}
         //singleDate
-        endDate={selectedDates.endDate}
+        //endDate={selectedDates.endDate}
         //onChange={setDate}
         onChange={setSelectedDates}
         locale={LOCALE}
         theme={THEME}
         clearDatesBtn
         blockedDates={BLOCKED_DATES}
-        availableDates={AVAILABLE_DAYS}
+        //availableDates={AVAILABLE_DAYS}
         weekendsBlocked
         disablePast={true}
         // weekendsStyled
