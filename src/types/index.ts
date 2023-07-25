@@ -42,3 +42,40 @@ export type Month =
   | "12";
 
 export type Year = string & { __numericStringBrand: never };
+
+// type predicates
+export function isMonth(month: string): month is Month {
+  return [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+  ].includes(month);
+}
+
+export function isYear(year: string): year is Year {
+  return /^\d+$/.test(year);
+}
+
+// type assertions
+export function assertMonth(month: string): asserts month is Month {
+  if (!isMonth(month))
+    throw new Error(
+      "Month value is invalid (has to be a string between 1 and 12)"
+    );
+}
+
+export function assertYear(year: string): asserts year is Year {
+  if (!isYear(year))
+    throw new Error(
+      "Year value is invalid (has to be a string with numeric characters)"
+    );
+}

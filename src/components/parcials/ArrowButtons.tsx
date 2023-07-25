@@ -25,7 +25,7 @@ export const ArrowButtons: FC<ArrowButtonsProps> = ({
     const { month: prevMonth, year: prevYear } = getPrevMonthYear(
       currentBox.month,
       currentBox.year
-    ) as { month: Month; year: Year };
+    );
     setCurrentBox({ month: prevMonth, year: prevYear });
     setMonthsToRender(getMonthsToRender(prevMonth, prevYear, numberOfMonths));
   };
@@ -34,7 +34,7 @@ export const ArrowButtons: FC<ArrowButtonsProps> = ({
     const { month: nextMonth, year: nextYear } = getNextMonthYear(
       currentBox.month,
       currentBox.year
-    ) as { month: Month; year: Year };
+    );
 
     setCurrentBox({ month: nextMonth, year: nextYear });
     setMonthsToRender(getMonthsToRender(nextMonth, nextYear, numberOfMonths));

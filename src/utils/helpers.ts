@@ -1,4 +1,4 @@
-import { Month, Year } from "../types";
+import { Month, Year, assertMonth, assertYear } from "../types";
 
 export const getShortDateString = (date: Date) =>
   date && !isNaN(date.getTime()) ? date.toISOString().slice(0, 10) : undefined;
@@ -11,15 +11,41 @@ export const getDateString = (year: number, month: number, day: number) =>
     day.toString()
   )}`;
 
-export const getNextMonthYear = (month: Month, year: Year) =>
-  +month === 12
-    ? { month: "1", year: (+year + 1).toString() }
-    : { month: (+month + 1).toString(), year };
+export const getNextMonthYear = (
+  month: Month,
+  year: Year
+): { month: Month; year: Year } => {
+  let nextMonth, nextYear;
 
-export const getPrevMonthYear = (month: Month, year: Year) =>
-  +month === 1
-    ? { month: "12", year: (+year - 1).toString() }
-    : { month: (+month - 1).toString(), year };
+  if (+month === 12) {
+    nextMonth = "1";
+    nextYear = (+year + 1).toString();
+  } else {
+    nextMonth = (+month + 1).toString();
+    nextYear = year;
+  }
+  assertMonth(nextMonth);
+  assertYear(nextYear);
+  return { month: nextMonth, year: nextYear };
+};
+
+export const getPrevMonthYear = (
+  month: Month,
+  year: Year
+): { month: Month; year: Year } => {
+  let prevMonth, prevYear;
+
+  if (+month === 1) {
+    prevMonth = "12";
+    prevYear = (+year - 1).toString();
+  } else {
+    prevMonth = (+month - 1).toString();
+    prevYear = year;
+  }
+  assertMonth(prevMonth);
+  assertYear(prevYear);
+  return { month: prevMonth, year: prevYear };
+};
 
 export const getFullDateByLocale = (dateObj: Date, locale = "en") => {
   if (!dateObj || isNaN(dateObj.getTime())) return undefined;
