@@ -167,3 +167,74 @@ export const isSameDay = (date1: Date, date2: Date): boolean => {
     date1.getDate() === date2.getDate()
   );
 };
+
+export const getTableCellClass = ({
+  availableDates,
+  blockedDates,
+  captions,
+  day,
+  disablePast,
+  endDate,
+  j,
+  monthMatrix,
+  month,
+  startDate,
+  year,
+  week,
+  weekendsBlocked,
+  weekendsStyled,
+}: {
+  availableDates?: string[];
+  blockedDates?: string[];
+  startDate: string | undefined;
+  endDate: string | undefined;
+  weekendsBlocked?: boolean;
+  captions?: { [key: string]: string };
+  disablePast?: boolean;
+  monthMatrix: string[][];
+  week: string[];
+  month: Month;
+  year: Year;
+  day: number;
+  j: number;
+  weekendsStyled?: boolean;
+}) => {
+  let classes = captions ? "table__td with_captions" : "table__td";
+
+  const currentDateString = getDateString(+year, +month, day);
+
+  if (disablePast && isPast(currentDateString)) {
+    classes += " blocked";
+  }
+  if (
+    (week.indexOf("1") > j && monthMatrix.indexOf(week) === 0) ||
+    (day < 7 && monthMatrix.indexOf(week) === monthMatrix.length - 1)
+  ) {
+    classes += " hidden";
+  } else if (
+    (!availableDates &&
+      blockedDates &&
+      blockedDates?.includes(currentDateString)) ||
+    (weekendsBlocked && isWeekend(currentDateString)) ||
+    (!blockedDates &&
+      availableDates &&
+      !availableDates.includes(currentDateString))
+  ) {
+    classes += " blocked";
+  } else if (
+    (startDate && startDate === currentDateString) ||
+    (endDate && endDate === currentDateString)
+  ) {
+    classes += " selected";
+  } else if (
+    startDate &&
+    endDate &&
+    currentDateString > startDate &&
+    currentDateString < endDate
+  ) {
+    classes += " between";
+  } else if (weekendsStyled && isWeekend(currentDateString)) {
+    classes += " weekend";
+  }
+  return classes;
+};

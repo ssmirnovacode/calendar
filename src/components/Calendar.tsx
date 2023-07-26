@@ -1,45 +1,26 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import {
-  getMonthsToRender,
-  getShortDateString,
-  isSameDay,
-} from "../utils/helpers";
-import { MonthComponent } from "./Month";
+import { getMonthsToRender } from "../utils/helpers";
+import { MonthWrapper } from "./MonthWrapper";
 import "../css/calendar.css";
-import { LocaleContext } from "../context/localeContext";
-import { BlockedContext } from "../context/blockedContext";
-import { CaptionsContext } from "../context/captionsContext";
 import React, { FC, useEffect, useMemo, useState } from "react";
 import { initTheme } from "../utils/theme";
 import { WARNING_BOTH_AVAIL_BLOCKED_DEFINED } from "../utils/constants";
-import {
-  Month,
-  SelectedDates,
-  Theme,
-  Year,
-  assertCalendarProps,
-} from "../types";
+import { Month, Year, assertCalendarProps } from "../types";
 import { CalendarProps } from "../../calendar";
 import { ArrowButtons, ArrowButtonsProps } from "./parcials/ArrowButtons";
 import { DARK_THEME } from "../mockups/dark-theme";
+import { CalendarContext } from "../context/calendarContext";
 
 const Calendar: FC<CalendarProps> = (props) => {
   const {
-    numberOfMonths = 2, // TODO - find out how to manage default props. optional?
+    numberOfMonths = 2,
     arrows = false,
     startDate,
-    endDate,
     onChange: setDates,
-    locale = "en-US",
     theme = DARK_THEME,
     clearDatesBtn = true,
     vertical = false,
-    blockedDates, // to keep undefined as default
+    blockedDates,
     availableDates,
-    weekendsBlocked = false,
-    weekendsStyled = false,
-    captions,
-    singleDate = false,
     disablePast = false,
   } = props || {};
   const initialDate: Date = startDate || new Date();
@@ -68,38 +49,8 @@ const Calendar: FC<CalendarProps> = (props) => {
     blockedDates &&
       availableDates &&
       console.warn(WARNING_BOTH_AVAIL_BLOCKED_DEFINED);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const handleDaySelect = (e: React.MouseEvent<HTMLElement>) => {
-    const target = e.target as HTMLElement;
-    const day: Date = new Date(target.id);
-
-    if (!day || isNaN(day.getTime())) return;
-    // if same day is chosen
-    if (singleDate) {
-      setDates({ startDate: day });
-      return;
-    } else if (
-      (startDate && isSameDay(day, startDate)) || // TODO maybe allow same day choice?
-      (endDate && isSameDay(day, endDate))
-    ) {
-      return;
-    } else if (startDate && !endDate) {
-      startDate.getTime() > day.getTime()
-        ? setDates({ startDate: day, endDate: startDate })
-        : setDates({ startDate, endDate: day });
-    } else if (!startDate && endDate) {
-      endDate.getTime() > day.getTime()
-        ? setDates({ startDate: day, endDate })
-        : setDates({ startDate: endDate, endDate: day });
-    }
-    // either both defined or both undefined
-    else {
-      //debugger;
-      setDates({ startDate: day, endDate: undefined });
-      console.log("change", { startDate: day, endDate: undefined });
-    }
-  };
 
   const arrowBtnsProps: ArrowButtonsProps = {
     disablePast,
@@ -110,48 +61,35 @@ const Calendar: FC<CalendarProps> = (props) => {
   };
 
   return (
-    <LocaleContext.Provider value={locale}>
-      <BlockedContext.Provider value={blockedDates}>
-        <CaptionsContext.Provider value={captions}>
-          <div className="calendar" data-testid="calendar">
-            {arrows && !vertical ? <ArrowButtons {...arrowBtnsProps} /> : null}
-            <div
-              className={
-                vertical ? "calendar__body vertical" : "calendar__body"
+    <CalendarContext.Provider value={props}>
+      <div className="calendar" data-testid="calendar">
+        {arrows && !vertical ? <ArrowButtons {...arrowBtnsProps} /> : null}
+        <div
+          className={vertical ? "calendar__body vertical" : "calendar__body"}
+        >
+          {monthsToRender.map(({ month, year }) => (
+            <MonthWrapper
+              key={month.toString() + year.toString() + Date.now()}
+              month={month}
+              year={year}
+            />
+          ))}
+        </div>
+        <div className="calendar__footer">
+          {clearDatesBtn && (
+            <button
+              className="calendar__footer--btn"
+              data-testid="clear-btn"
+              onClick={() =>
+                setDates({ startDate: undefined, endDate: undefined })
               }
             >
-              {monthsToRender.map(({ month, year }) => (
-                <MonthComponent
-                  key={month.toString() + year.toString() + Date.now()}
-                  month={month}
-                  year={year}
-                  availableDates={blockedDates ? undefined : availableDates}
-                  handleDaySelect={handleDaySelect}
-                  startDate={startDate && getShortDateString(startDate)}
-                  endDate={endDate && getShortDateString(endDate)}
-                  weekendsBlocked={weekendsBlocked}
-                  weekendsStyled={weekendsStyled}
-                  disablePast={disablePast}
-                />
-              ))}
-            </div>
-            <div className="calendar__footer">
-              {clearDatesBtn && (
-                <button
-                  className="calendar__footer--btn"
-                  data-testid="clear-btn"
-                  onClick={() =>
-                    setDates({ startDate: undefined, endDate: undefined })
-                  }
-                >
-                  <span>&times;</span> Clear dates
-                </button>
-              )}
-            </div>
-          </div>
-        </CaptionsContext.Provider>
-      </BlockedContext.Provider>
-    </LocaleContext.Provider>
+              <span>&times;</span> Clear dates
+            </button>
+          )}
+        </div>
+      </div>
+    </CalendarContext.Provider>
   );
 };
 
