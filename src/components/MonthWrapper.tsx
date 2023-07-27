@@ -6,17 +6,13 @@ import {
 } from "../utils/helpers";
 import "../css/month.css";
 import React, { FC, useContext } from "react";
-import { Month, Year } from "../types";
 import { MonthComponent } from "./MonthComponent";
 import { CalendarContext } from "../context/calendarContext";
+import { MonthContext } from "../context/monthContext";
 
-type MonthProps = {
-  month: Month;
-  year: Year;
-};
-
-export const MonthWrapper: FC<MonthProps> = ({ month, year }) => {
+export const MonthWrapper: FC = () => {
   const { locale } = useContext(CalendarContext)!; // TODO - verify if defined
+  const { month, year } = useContext(MonthContext)!;
 
   const monthMatrix = getMonthMatrix(getDaysArray(month, year));
   const weekdays = getWeekdaysByLocale(monthMatrix[1]!, month, year, locale); // add typing monthMatrix[1] to avoid !
@@ -36,7 +32,7 @@ export const MonthWrapper: FC<MonthProps> = ({ month, year }) => {
         </thead>
 
         <tbody className="table__body">
-          <MonthComponent month={month} year={year} />
+          <MonthComponent />
         </tbody>
       </table>
     </div>

@@ -5,7 +5,7 @@ export interface CalendarProps {
   endDate: Date | undefined;
   onChange: (dates: SelectedDates) => void; // TODO - check singleDate funcitonality  | ((date: Date) => void
   locale?: string; // TODO: add valid list
-  theme: Theme;
+  theme?: Theme;
   clearDatesBtn?: boolean;
   vertical?: boolean;
   blockedDates?: string[]; // to keep undefined as default

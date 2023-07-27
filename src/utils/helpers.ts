@@ -1,4 +1,5 @@
-import { Month, Year, assertMonth, assertYear } from "../types";
+import { CalendarProps } from "../../calendar";
+import { Month, Resolve, Year, assertMonth, assertYear } from "../types";
 
 export const getShortDateString = (date: Date) =>
   date && !isNaN(date.getTime()) ? date.toISOString().slice(0, 10) : undefined;
@@ -168,6 +169,19 @@ export const isSameDay = (date1: Date, date2: Date): boolean => {
   );
 };
 
+type TableCellsClassProps = Resolve<
+  Omit<CalendarProps, "startDate" | "endDate" | "onChange"> & {
+    startDate: string | undefined;
+    endDate: string | undefined;
+    monthMatrix: string[][];
+    week: string[];
+    month: Month;
+    year: Year;
+    day: number;
+    j: number;
+  }
+>;
+
 export const getTableCellClass = ({
   availableDates,
   blockedDates,
@@ -183,22 +197,7 @@ export const getTableCellClass = ({
   week,
   weekendsBlocked,
   weekendsStyled,
-}: {
-  availableDates?: string[];
-  blockedDates?: string[];
-  startDate: string | undefined;
-  endDate: string | undefined;
-  weekendsBlocked?: boolean;
-  captions?: { [key: string]: string };
-  disablePast?: boolean;
-  monthMatrix: string[][];
-  week: string[];
-  month: Month;
-  year: Year;
-  day: number;
-  j: number;
-  weekendsStyled?: boolean;
-}) => {
+}: TableCellsClassProps) => {
   let classes = captions ? "table__td with_captions" : "table__td";
 
   const currentDateString = getDateString(+year, +month, day);

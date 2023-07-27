@@ -1,5 +1,6 @@
 import { CalendarProps } from "../../calendar";
 
+export type Resolve<T> = T extends Function ? T : { [K in keyof T]: T[K] };
 export type Theme = {
   color: string;
   bgc: string;
@@ -44,6 +45,11 @@ export type Month =
   | "12";
 
 export type Year = string & { __numericStringBrand: never };
+
+export type MonthProps = {
+  month: Month;
+  year: Year;
+};
 
 // type predicates
 export function isMonth(month: string): month is Month {
@@ -98,7 +104,7 @@ export function areCalendarPropsValid(value: any): value is CalendarProps {
 
   if (typeof value.onChange !== "function") {
     // TODO specify further
-    console.warn("INVALID PROPS: endDate must be a function");
+    console.warn("INVALID PROPS: onChange must be a function");
     // TODO add params validation
     isValid = false;
   }

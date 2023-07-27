@@ -9,6 +9,7 @@ import { CalendarProps } from "../../calendar";
 import { ArrowButtons, ArrowButtonsProps } from "./parcials/ArrowButtons";
 import { DARK_THEME } from "../mockups/dark-theme";
 import { CalendarContext } from "../context/calendarContext";
+import { MonthContext } from "../context/monthContext";
 
 const Calendar: FC<CalendarProps> = (props) => {
   const {
@@ -62,33 +63,33 @@ const Calendar: FC<CalendarProps> = (props) => {
 
   return (
     <CalendarContext.Provider value={props}>
-      <div className="calendar" data-testid="calendar">
-        {arrows && !vertical ? <ArrowButtons {...arrowBtnsProps} /> : null}
-        <div
-          className={vertical ? "calendar__body vertical" : "calendar__body"}
-        >
-          {monthsToRender.map(({ month, year }) => (
-            <MonthWrapper
-              key={month.toString() + year.toString() + Date.now()}
-              month={month}
-              year={year}
-            />
-          ))}
+      <MonthContext.Provider value={{ month, year }}>
+        <div className="calendar" data-testid="calendar">
+          {arrows && !vertical ? <ArrowButtons {...arrowBtnsProps} /> : null}
+          <div
+            className={vertical ? "calendar__body vertical" : "calendar__body"}
+          >
+            {monthsToRender.map(({ month, year }) => (
+              <MonthWrapper
+                key={month.toString() + year.toString() + Date.now()}
+              />
+            ))}
+          </div>
+          <div className="calendar__footer">
+            {clearDatesBtn && (
+              <button
+                className="calendar__footer--btn"
+                data-testid="clear-btn"
+                onClick={() =>
+                  setDates({ startDate: undefined, endDate: undefined })
+                }
+              >
+                <span>&times;</span> Clear dates
+              </button>
+            )}
+          </div>
         </div>
-        <div className="calendar__footer">
-          {clearDatesBtn && (
-            <button
-              className="calendar__footer--btn"
-              data-testid="clear-btn"
-              onClick={() =>
-                setDates({ startDate: undefined, endDate: undefined })
-              }
-            >
-              <span>&times;</span> Clear dates
-            </button>
-          )}
-        </div>
-      </div>
+      </MonthContext.Provider>
     </CalendarContext.Provider>
   );
 };

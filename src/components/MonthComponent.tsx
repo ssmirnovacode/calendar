@@ -6,17 +6,13 @@ import {
   getTableCellClass,
   isSameDay,
 } from "../utils/helpers";
-import { Month, Year } from "../types";
 import { CalendarContext } from "../context/calendarContext";
 import { Day } from "./Day";
+import { MonthContext } from "../context/monthContext";
 
-type MonthProps = {
-  month: Month;
-  year: Year;
-};
-
-export const MonthComponent: React.FC<MonthProps> = ({ month, year }) => {
+export const MonthComponent: React.FC = () => {
   const calendarProps = useContext(CalendarContext);
+  const { month, year } = useContext(MonthContext)!;
   const { endDate, onChange: setDates, startDate, singleDate } = calendarProps!; // TODO - check if it is ok
 
   const monthMatrix = getMonthMatrix(getDaysArray(month, year));
