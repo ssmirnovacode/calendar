@@ -1,5 +1,4 @@
 import { getMonthsToRender } from "../utils/helpers";
-import { MonthWrapper } from "./MonthWrapper";
 import "../css/calendar.css";
 import React, { FC, useEffect, useMemo, useState } from "react";
 import { initTheme } from "../utils/theme";
@@ -10,6 +9,7 @@ import { ArrowButtons, ArrowButtonsProps } from "./parcials/ArrowButtons";
 import { DARK_THEME } from "../mockups/dark-theme";
 import { CalendarContext } from "../context/calendarContext";
 import { MonthContext } from "../context/monthContext";
+import { MonthComponent } from "./MonthComponent";
 
 const Calendar: FC<CalendarProps> = (props) => {
   const {
@@ -70,7 +70,7 @@ const Calendar: FC<CalendarProps> = (props) => {
             className={vertical ? "calendar__body vertical" : "calendar__body"}
           >
             {monthsToRender.map(({ month, year }) => (
-              <MonthWrapper
+              <MonthComponent
                 key={month.toString() + year.toString() + Date.now()}
               />
             ))}

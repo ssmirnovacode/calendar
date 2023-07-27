@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import {
   getDaysArray,
+  getMonthByLocale,
   getMonthMatrix,
   getShortDateString,
   getTableCellClass,
+  getWeekdaysByLocale,
   isSameDay,
 } from "../utils/helpers";
 import { CalendarContext } from "../context/calendarContext";
@@ -13,9 +15,16 @@ import { MonthContext } from "../context/monthContext";
 export const MonthComponent: React.FC = () => {
   const calendarProps = useContext(CalendarContext);
   const { month, year } = useContext(MonthContext)!;
-  const { endDate, onChange: setDates, startDate, singleDate } = calendarProps!; // TODO - check if it is ok
+  const {
+    endDate,
+    locale,
+    onChange: setDates,
+    startDate,
+    singleDate,
+  } = calendarProps!; // TODO - check if it is ok
 
   const monthMatrix = getMonthMatrix(getDaysArray(month, year));
+  const weekdays = getWeekdaysByLocale(monthMatrix[1]!, month, year, locale);
 
   const getDayClass = (week: string[], day: number, j: number) =>
     getTableCellClass({
@@ -68,12 +77,29 @@ export const MonthComponent: React.FC = () => {
     });
 
   return (
-    <>
-      {monthMatrix.map((week, i) => {
-        return (
-          <tr key={week.reduce((a, b) => a + b) + i}>{renderMonth(week)}</tr>
-        );
-      })}
-    </>
+    <div className="month" title="month" data-testid={`month-${month}`}>
+      <div className="month__header">
+        <span>{getMonthByLocale(month, year, locale)}</span> <span>{year}</span>
+      </div>
+      <table className="table">
+        <thead className="table__header">
+          <tr>
+            {weekdays.map((wd) => (
+              <th key={wd}>{wd}</th>
+            ))}
+          </tr>
+        </thead>
+
+        <tbody className="table__body">
+          {monthMatrix.map((week, i) => {
+            return (
+              <tr key={week.reduce((a, b) => a + b) + i}>
+                {renderMonth(week)}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
   );
 };
