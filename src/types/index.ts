@@ -44,7 +44,7 @@ export type Month =
   | "11"
   | "12";
 
-export type Year = string & { __numericStringBrand: never };
+export type Year = `${number}`;
 
 export type MonthProps = {
   month: Month;

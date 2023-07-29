@@ -18,7 +18,7 @@ export const Day: React.FC<DayProps> = ({
   year,
   handleDaySelect,
 }) => {
-  const { captions } = useContext(CalendarContext)!;
+  const { captions } = useContext(CalendarContext);
   const getDayContent = (day: number) => {
     const dateString = getDateString(+year, +month, day);
     if (!captions) return day;

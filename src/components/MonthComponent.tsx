@@ -14,7 +14,7 @@ import { MonthContext } from "../context/monthContext";
 
 export const MonthComponent: React.FC = () => {
   const calendarProps = useContext(CalendarContext);
-  const { month, year } = useContext(MonthContext)!;
+  const { month, year } = useContext(MonthContext);
   const {
     endDate,
     locale,
