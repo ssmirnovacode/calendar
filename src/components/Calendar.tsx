@@ -23,7 +23,7 @@ const Calendar: FC<CalendarProps> = (props) => {
     blockedDates,
     availableDates,
     disablePast = false,
-  } = props || {};
+  } = props;
   const initialDate: Date = startDate || new Date();
 
   const [, month, year]: [string, Month, Year] = initialDate
