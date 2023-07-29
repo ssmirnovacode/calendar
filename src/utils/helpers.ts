@@ -1,5 +1,12 @@
 import { CalendarProps } from "../../calendar";
-import { Month, Resolve, Year, assertMonth, assertYear } from "../types";
+import {
+  Month,
+  MonthProps,
+  Resolve,
+  Year,
+  assertMonth,
+  assertYear,
+} from "../types";
 
 export const getShortDateString = (date: Date) =>
   date && !isNaN(date.getTime()) ? date.toISOString().slice(0, 10) : undefined;
@@ -12,10 +19,7 @@ export const getDateString = (year: number, month: number, day: number) =>
     day.toString()
   )}`;
 
-export const getNextMonthYear = (
-  month: Month,
-  year: Year
-): { month: Month; year: Year } => {
+export const getNextMonthYear = (month: Month, year: Year): MonthProps => {
   let nextMonth, nextYear;
 
   if (+month === 12) {
@@ -30,10 +34,7 @@ export const getNextMonthYear = (
   return { month: nextMonth, year: nextYear };
 };
 
-export const getPrevMonthYear = (
-  month: Month,
-  year: Year
-): { month: Month; year: Year } => {
+export const getPrevMonthYear = (month: Month, year: Year): MonthProps => {
   let prevMonth, prevYear;
 
   if (+month === 1) {
@@ -83,10 +84,7 @@ export const getDaysInMonth = (month: Month, year: Year) =>
   new Date(+year, +month, 0).getDate();
 
 export const getDaysArray = (month: Month, year: Year) => {
-  const { month: prevMonth, year: prevYear } = getPrevMonthYear(
-    month,
-    year
-  ) as { month: Month; year: Year };
+  const { month: prevMonth, year: prevYear } = getPrevMonthYear(month, year);
   const daysInPrevMonth = getDaysInMonth(prevMonth, prevYear); // getDaysInMonth(month-1, year);
   const daysInMonth = getDaysInMonth(month, year);
   const firstDayWeekday = new Date(`${year}-${month}-01`).getDay();
@@ -126,19 +124,16 @@ export const getMonthMatrix = (arr: string[]) => {
 export const getMonthsToRender = (
   currentMonth: Month,
   currentYear: Year,
-  monthsToRender: number
+  monthsToRender: number = 1
 ) => {
-  if (!monthsToRender) return [];
+  if (monthsToRender < 1) return [];
 
   const monthsArr = [{ month: currentMonth, year: currentYear }];
   let nextMonth = currentMonth;
   let nextYear = currentYear;
   let i = 1;
   while (i < monthsToRender) {
-    const { month, year } = getNextMonthYear(nextMonth, nextYear) as {
-      month: Month;
-      year: Year;
-    };
+    const { month, year } = getNextMonthYear(nextMonth, nextYear);
     monthsArr.push({ month, year });
     nextMonth = month;
     nextYear = year;
