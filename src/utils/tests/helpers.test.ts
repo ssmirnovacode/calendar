@@ -75,12 +75,13 @@ test("getMonthsToRender naive use", () => {
 
   // eslint-disable-next-line testing-library/render-result-naming-convention
   const monthsArr1 = getMonthsToRender("12", "2022", 2);
-  expect(monthsArr.length).toBe(2);
+  expect(monthsArr1.length).toBe(2);
   expect(monthsArr1[1]!!["month"]).toBe("1");
   expect(monthsArr1[1]!!["year"]).toBe("2023");
 
   // eslint-disable-next-line testing-library/render-result-naming-convention
   const monthsArr2 = getMonthsToRender("1", "2023", 4);
+  expect(monthsArr2.length).toBe(4);
   expect(monthsArr2[3]!["month"]).toBe("4");
   expect(monthsArr2[3]!["year"]).toBe("2023");
 
@@ -92,7 +93,7 @@ test("getMonthsToRender naive use", () => {
   // eslint-disable-next-line testing-library/render-result-naming-convention
   const monthsArr4 = getMonthsToRender("12", "2022", 6);
   expect(monthsArr4[2]!["month"]).toBe("2");
-  expect(monthsArr4[2]!["year"]).toBe("2023"); // 2022
+  expect(monthsArr4[2]!["year"]).toBe("2023");
 });
 
 test("getNextMonthYear naive use", () => {

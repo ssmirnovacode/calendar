@@ -11,6 +11,7 @@ import { CalendarContext } from "../context/calendarContext";
 import { Day } from "./Day";
 import { MonthContext } from "../context/monthContext";
 import { getTableCellClass } from "../utils/utils";
+import "../css/month.css";
 
 export const MonthComponent: React.FC = () => {
   const calendarProps = useContext(CalendarContext);
@@ -21,7 +22,7 @@ export const MonthComponent: React.FC = () => {
     onChange: setDates,
     startDate,
     singleDate,
-  } = calendarProps!; // TODO - check if it is ok
+  } = calendarProps;
 
   const monthMatrix = getMonthMatrix(getDaysArray(month, year));
   const weekdays = getWeekdaysByLocale(monthMatrix[1]!, month, year, locale);

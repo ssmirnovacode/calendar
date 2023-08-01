@@ -60,36 +60,37 @@ const Calendar: FC<CalendarProps> = (props) => {
     setCurrentBox,
     setMonthsToRender,
   };
-
+  console.log(monthsToRender);
   return (
     <CalendarContext.Provider value={props}>
-      <MonthContext.Provider value={{ month, year }}>
-        <div className="calendar" data-testid="calendar">
-          {arrows && !vertical ? <ArrowButtons {...arrowBtnsProps} /> : null}
-          <div
-            className={vertical ? "calendar__body vertical" : "calendar__body"}
-          >
-            {monthsToRender.map(({ month, year }) => (
-              <MonthComponent
-                key={month.toString() + year.toString() + Date.now()}
-              />
-            ))}
-          </div>
-          <div className="calendar__footer">
-            {clearDatesBtn && (
-              <button
-                className="calendar__footer--btn"
-                data-testid="clear-btn"
-                onClick={() =>
-                  setDates({ startDate: undefined, endDate: undefined })
-                }
-              >
-                <span>&times;</span> Clear dates
-              </button>
-            )}
-          </div>
+      <div className="calendar" data-testid="calendar">
+        {arrows && !vertical ? <ArrowButtons {...arrowBtnsProps} /> : null}
+        <div
+          className={vertical ? "calendar__body vertical" : "calendar__body"}
+        >
+          {monthsToRender.map(({ month, year }) => (
+            <MonthContext.Provider
+              value={{ month, year }}
+              key={month.toString() + year.toString() + Date.now()}
+            >
+              <MonthComponent />
+            </MonthContext.Provider>
+          ))}
         </div>
-      </MonthContext.Provider>
+        <div className="calendar__footer">
+          {clearDatesBtn && (
+            <button
+              className="calendar__footer--btn"
+              data-testid="clear-btn"
+              onClick={() =>
+                setDates({ startDate: undefined, endDate: undefined })
+              }
+            >
+              <span>&times;</span> Clear dates
+            </button>
+          )}
+        </div>
+      </div>
     </CalendarContext.Provider>
   );
 };

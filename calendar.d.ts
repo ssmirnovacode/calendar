@@ -3,7 +3,7 @@ export interface CalendarProps {
   arrows?: boolean;
   startDate: Date | undefined; // mandatory but can be undefined
   endDate: Date | undefined;
-  onChange: (dates: SelectedDates) => void; // TODO - check singleDate funcitonality  | ((date: Date) => void
+  onChange: (dates: SelectedDates) => void | ((date: Date) => void); // TODO - check singleDate funcitonality  | ((date: Date) => void
   locale?: string; // TODO: add valid list
   theme?: Theme;
   clearDatesBtn?: boolean;

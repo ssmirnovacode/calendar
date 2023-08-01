@@ -41,7 +41,7 @@ const App: FC = () => {
       {/* <div>{date?.toDateString()}</div> */}
 
       <Calendar
-        numberOfMonths={2}
+        numberOfMonths={3}
         arrows={true}
         //startDate={date}
         startDate={selectedDates.startDate}
