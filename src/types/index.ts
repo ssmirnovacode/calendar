@@ -1,6 +1,7 @@
 import { CalendarProps } from "../../calendar";
 
 export type Resolve<T> = T extends Function ? T : { [K in keyof T]: T[K] };
+
 export type Theme = {
   color: string;
   bgc: string;

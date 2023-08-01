@@ -4,13 +4,13 @@ import {
   getMonthByLocale,
   getMonthMatrix,
   getShortDateString,
-  getTableCellClass,
   getWeekdaysByLocale,
   isSameDay,
 } from "../utils/helpers";
 import { CalendarContext } from "../context/calendarContext";
 import { Day } from "./Day";
 import { MonthContext } from "../context/monthContext";
+import { getTableCellClass } from "../utils/utils";
 
 export const MonthComponent: React.FC = () => {
   const calendarProps = useContext(CalendarContext);
