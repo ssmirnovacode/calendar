@@ -70,7 +70,7 @@ export const MonthComponent: React.FC = () => {
     }
   };
 
-  const renderMonth = (week: string[]) =>
+  const renderWeek = (week: string[]) =>
     week.map((day, j) => {
       const dayClass = getDayClass(week, +day, j);
       const props = { dayClass, day, month, year, handleDaySelect };
@@ -94,9 +94,7 @@ export const MonthComponent: React.FC = () => {
         <tbody className="table__body">
           {monthMatrix.map((week, i) => {
             return (
-              <tr key={week.reduce((a, b) => a + b) + i}>
-                {renderMonth(week)}
-              </tr>
+              <tr key={week.reduce((a, b) => a + b) + i}>{renderWeek(week)}</tr>
             );
           })}
         </tbody>
