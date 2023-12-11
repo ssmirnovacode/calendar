@@ -42,7 +42,7 @@ export const ArrowButtons: FC<ArrowButtonsProps> = ({
 
   return (
     <div className="calendar__arrows" data-testid="arrows">
-      {(!disablePast || +currentBox.month !== new Date().getMonth() + 1) && (
+      {!disablePast && (
         <button
           className="calendar__arrows--prev"
           data-testid="prev"

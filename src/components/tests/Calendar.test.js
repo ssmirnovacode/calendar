@@ -8,9 +8,9 @@ const NEXT_MONTH = 11; // first month that wouldnt apper in 2-months view until 
 
 describe('Calendar test', () => {
    
-    const currentMonth = new Date().getMonth()+1;
+    const currentMonth = 9; // new Date().getMonth()+1;
     const currentDay = new Date().getDate();
-    const requiredProps = { startDate: START_DATE, endDate: NEXT_DATE, handleChange: ({startDate: START_DATE, endDate: NEXT_DATE}) => {} }
+    const requiredProps = { startDate: START_DATE, endDate: NEXT_DATE, onChange: ({startDate: START_DATE, endDate: NEXT_DATE}) => {} }
 
     test('default rendering', () => {
         render(<Calendar {...requiredProps} />); // overwise test will fail once month is passed
@@ -31,20 +31,20 @@ describe('Calendar test', () => {
         expect(months.length).toBe(8)
     })
 
-    test.skip('locale = DE', () => {
-        render(<Calendar locale="de-DE" startDate={NEXT_DATE}/>); 
+    test('locale = DE', () => {
+        render(<Calendar {...requiredProps} locale="de-DE" startDate={NEXT_DATE}/>); 
         const calendar = screen.getByTestId('calendar');
         expect(calendar).toMatchSnapshot();
     })
 
-    test.skip('vertical render', () => {
-        render(<Calendar vertical startDate={START_DATE}/>); 
+    test('vertical render', () => {
+        render(<Calendar {...requiredProps} vertical startDate={START_DATE}/>); 
         const calendar = screen.getByTestId('calendar');
         expect(calendar).toMatchSnapshot();
     })
 
-    test.skip('disabled past', () => {
-        render(<Calendar arrows disablePast />); 
+    test('disabled past', () => {
+        render(<Calendar {...requiredProps} arrows disablePast />); 
         const calendar = screen.getByTestId('calendar');
         expect(calendar).toMatchSnapshot();
         const prevArrow = screen.queryByTestId('prev');
@@ -59,16 +59,16 @@ describe('Calendar test', () => {
         }
     });
 
-    test.skip('blocked weekends', () => {
-        render(<Calendar weekendsBlocked startDate={START_DATE}/>); 
-        const saturday = screen.getByTestId('day-10.9');
+    test('blocked weekends', () => {
+        render(<Calendar {...requiredProps} weekendsBlocked startDate={START_DATE}/>); 
+        const saturday = screen.getByTestId('day-9.9');
         expect(saturday).toHaveClass('blocked')
-        const sunday = screen.getByTestId('day-11.9');
+        const sunday = screen.getByTestId('day-10.9');
         expect(sunday).toHaveClass('blocked')
     })
 
-    test.skip('with selected dates', () => {
-        render(<Calendar startDate={START_DATE} endDate ={NEXT_DATE} />); 
+    test('with selected dates', () => {
+        render(<Calendar {...requiredProps} startDate={START_DATE} endDate ={NEXT_DATE} />); 
         const calendar = screen.getByTestId('calendar');
         expect(calendar).toMatchSnapshot();
         const from = screen.getByTestId(`day-${START_DATE.getDate()-1}.${START_DATE.getMonth()+1}`); // -1 coz Date() returns 1 day less
@@ -79,24 +79,24 @@ describe('Calendar test', () => {
         expect(between).toHaveClass('between')
     })
 
-    test.skip('render without clear btn', () => {
-        render(<Calendar clearDatesBtn={false} startDate={START_DATE}/>); 
+    test('render without clear btn', () => {
+        render(<Calendar {...requiredProps} clearDatesBtn={false} startDate={START_DATE}/>); 
         const calendar = screen.getByTestId('calendar');
         expect(calendar).toMatchSnapshot();
         const clearBtn = screen.queryByTestId('clear-btn');
         expect(clearBtn).toBeNull()
     })
 
-    test.skip('render arrows', () => {
-        render(<Calendar arrows startDate={START_DATE} />);
+    test('render arrows', () => {
+        render(<Calendar {...requiredProps} arrows startDate={START_DATE} />);
         const calendar = screen.getByTestId('calendar');
         expect(calendar).toMatchSnapshot();
         const arrows = screen.getByTestId('arrows');
         expect(arrows).toBeInTheDocument();
     })
 
-    test.skip('next btn click', () => {
-        render(<Calendar arrows startDate={NEXT_DATE} />);
+    test('next btn click', () => {
+        render(<Calendar {...requiredProps} arrows startDate={NEXT_DATE} />);
         const nextArrow = screen.getByTestId('next');
         userEvent.click(nextArrow);
         const nextMonth = screen.getByTestId(`month-${NEXT_MONTH+1}`); // +1 here and after is because data-testid is using real month numbers
@@ -105,8 +105,8 @@ describe('Calendar test', () => {
         expect(initialMonth).toBeNull();
     })
 
-    test.skip('prev btn click', () => {
-        render(<Calendar arrows startDate={NEXT_DATE} />);
+    test('prev btn click', () => {
+        render(<Calendar {...requiredProps} arrows startDate={NEXT_DATE} />);
         const prevArrow = screen.getByTestId('prev');
         userEvent.click(prevArrow);
         const initialMonth = screen.getByTestId(`month-${NEXT_DATE.getMonth()+1}`);       
@@ -117,12 +117,5 @@ describe('Calendar test', () => {
         }`);       
         expect(initialSecondMonth).toBeNull();
     })
-
-    // test('select day', () => {
-    //     render(<Calendar startDate={START_DATE}/>);
-    //     const clickedCell = screen.getByTestId(`day-${START_DATE.getDate()+1}.${START_DATE.getMonth()+1}`); // 22/09/2022
-    //     userEvent.click(clickedCell);
-    //     expect(clickedCell).toHaveClass('selected')
-    // })
 
 })

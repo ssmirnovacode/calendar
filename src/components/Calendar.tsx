@@ -60,7 +60,7 @@ const Calendar: FC<CalendarProps> = (props) => {
     setCurrentBox,
     setMonthsToRender,
   };
-  console.log(monthsToRender);
+  //console.log(monthsToRender);
   return (
     <CalendarContext.Provider value={props}>
       <div className="calendar" data-testid="calendar">
